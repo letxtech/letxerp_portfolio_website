@@ -1,0 +1,499 @@
+﻿/*
+ * LetX ERP - Custom Overrides
+ * Mobile Navbar Enhancement + Pricing Ticks + Blue Theme Polish
+ * ---------------------------------------------------------------
+ */
+
+/* ============================================================
+   1. MODERN HAMBURGER BUTTON
+   Replaces the basic 2-line bar with a clean 3-line icon
+   that animates into an X on open — professional & smooth.
+   ============================================================ */
+
+/* Hide the meanmenu-generated button completely */
+.mean-container a.meanmenu-reveal {
+  display: none !important;
+}
+
+/* Hamburger wrapper */
+.header__hamburger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* The toggle container */
+.header-1 .header-right .sidebar__toggle {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+.header-1 .header-right .sidebar__toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.header-1.header-2 .header-right .sidebar__toggle:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* The 3-bar icon container */
+.header-1 .header-right .sidebar__toggle .header-bar {
+  position: relative;
+  width: 26px;
+  height: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+/* Each bar span */
+.header-1 .header-right .sidebar__toggle .header-bar span {
+  display: block;
+  width: 100%;
+  height: 2.5px;
+  border-radius: 3px;
+  background: var(--pp-header);
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+              opacity 0.25s ease,
+              width 0.3s ease;
+  transform-origin: center;
+}
+
+/* style-1 = homepage (light hero) — dark bars */
+.header-1 .header-right .sidebar__toggle .header-bar.style-1 span {
+  background: var(--pp-header);
+}
+
+/* Default header (transparent initial state on homepage) — white bars */
+.header-1 .header-right .sidebar__toggle .header-bar span:first-child,
+.header-1 .header-right .sidebar__toggle .header-bar span:last-child {
+  background: var(--pp-white);
+  width: 100%;
+}
+/* Middle bar slightly shorter for visual polish */
+.header-1 .header-right .sidebar__toggle .header-bar span:nth-child(2) {
+  background: var(--pp-white);
+  width: 80%;
+}
+
+/* style-1 (homepage) overrides — dark bars */
+.header-1 .header-right .sidebar__toggle .header-bar.style-1 span:first-child,
+.header-1 .header-right .sidebar__toggle .header-bar.style-1 span:nth-child(2),
+.header-1 .header-right .sidebar__toggle .header-bar.style-1 span:last-child {
+  background: var(--pp-header);
+}
+
+/* Active / open state — animate to X */
+.header-1 .header-right .sidebar__toggle .header-bar.active span:first-child {
+  transform: translateY(8.75px) rotate(45deg);
+  width: 100%;
+}
+.header-1 .header-right .sidebar__toggle .header-bar.active span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+  width: 100%;
+}
+.header-1 .header-right .sidebar__toggle .header-bar.active span:last-child {
+  transform: translateY(-8.75px) rotate(-45deg);
+  width: 100%;
+}
+
+/* Sticky state — header-1 (homepage) bars become dark */
+.sticky.header-1 .header-right .sidebar__toggle .header-bar span {
+  background: var(--pp-header);
+}
+.sticky.header-1 .header-right .sidebar__toggle .header-bar span:nth-child(2) {
+  width: 80%;
+}
+
+/* header-2 (inner pages, always dark bg) — white bars */
+.sticky.header-2 .header-right .sidebar__toggle .header-bar span,
+.header-1.header-2 .header-right .sidebar__toggle .header-bar span {
+  background: var(--pp-white);
+}
+.header-1.header-2 .header-right .sidebar__toggle .header-bar span:nth-child(2) {
+  width: 80%;
+}
+
+/* ============================================================
+   2. MODERN OFFCANVAS PANEL
+   Clean, card-style right-side drawer with smooth slide
+   ============================================================ */
+
+.offcanvas__info {
+  background: #ffffff;
+  border-left: 3px solid var(--pp-theme);
+  box-shadow: -8px 0 40px rgba(13, 27, 62, 0.12);
+  width: 380px;
+  transform: translateX(calc(100% + 30px));
+  transition: transform 0.42s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.offcanvas__info.info-open {
+  transform: translateX(0);
+}
+
+/* Overlay backdrop */
+.offcanvas__overlay {
+  background: rgba(13, 27, 62, 0.65);
+  backdrop-filter: blur(3px);
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+.offcanvas__overlay.overlay-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Wrapper padding */
+.offcanvas__wrapper {
+  padding: 28px 28px 30px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top logo row */
+.offcanvas__top {
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(21, 101, 192, 0.12);
+  margin-bottom: 0;
+}
+
+/* Close button — modern rounded square */
+.offcanvas__wrapper .offcanvas__content .offcanvas__close {
+  width: 38px;
+  height: 38px;
+  line-height: 38px;
+  border-radius: 8px;
+  background: rgba(21, 101, 192, 0.08);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.offcanvas__wrapper .offcanvas__content .offcanvas__close:hover {
+  background: var(--pp-theme);
+  transform: rotate(90deg);
+}
+.offcanvas__wrapper .offcanvas__content .offcanvas__close i {
+  color: var(--pp-theme);
+  font-size: 15px;
+  transition: color 0.2s ease;
+}
+.offcanvas__wrapper .offcanvas__content .offcanvas__close:hover i {
+  color: #ffffff;
+}
+
+/* Tagline text */
+.offcanvas__wrapper .offcanvas__content .text {
+  color: var(--pp-text);
+  font-size: 14px;
+  line-height: 1.6;
+  margin-top: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(21, 101, 192, 0.08);
+}
+
+/* Mobile nav links injected by meanmenu into .mobile-menu */
+.offcanvas__info .mean-container {
+  margin-top: 12px;
+}
+.offcanvas__info .mean-container .mean-nav {
+  background: transparent;
+  margin-top: 0;
+}
+.offcanvas__info .mean-container .mean-nav ul {
+  padding: 0;
+  margin: 0;
+}
+.offcanvas__info .mean-container .mean-nav ul li a {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: "DM Sans", sans-serif;
+  color: var(--pp-header);
+  padding: 12px 0;
+  border-top: 1px solid rgba(21, 101, 192, 0.08);
+  transition: color 0.2s ease, padding-left 0.2s ease;
+}
+.offcanvas__info .mean-container .mean-nav ul li a:hover {
+  color: var(--pp-theme);
+  padding-left: 6px;
+}
+.offcanvas__info .mean-container .mean-nav ul li a.mean-expand {
+  width: 38px;
+  height: 38px;
+  line-height: 38px;
+  padding: 0;
+  top: 6px;
+  right: 0;
+  background: rgba(21, 101, 192, 0.06);
+  border-radius: 6px;
+  border: none;
+  color: var(--pp-theme);
+  font-size: 14px;
+  text-align: center;
+}
+.offcanvas__info .mean-container .mean-nav ul li a.mean-expand:hover {
+  background: var(--pp-theme);
+  color: #fff;
+}
+.offcanvas__info .mean-container a.meanmenu-reveal {
+  display: none !important;
+}
+
+/* Contact section */
+.offcanvas__wrapper .offcanvas__content .offcanvas__contact {
+  margin-top: 20px;
+  flex: 1;
+}
+.offcanvas__wrapper .offcanvas__content .offcanvas__contact h4 {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pp-theme);
+  margin-bottom: 12px;
+}
+.offcanvas__wrapper .offcanvas__content .offcanvas__contact ul {
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.offcanvas__wrapper .offcanvas__content .offcanvas__contact ul li {
+  font-size: 14px;
+  font-weight: 500;
+  gap: 10px;
+}
+.offcanvas__wrapper .offcanvas__content .offcanvas__contact ul li a {
+  color: var(--pp-text);
+  transition: color 0.2s;
+}
+.offcanvas__wrapper .offcanvas__content .offcanvas__contact ul li a:hover {
+  color: var(--pp-theme);
+}
+.offcanvas__wrapper .offcanvas__content .offcanvas__contact ul li .offcanvas__contact-icon {
+  margin-right: 10px;
+  width: 34px;
+  height: 34px;
+  background: rgba(21, 101, 192, 0.08);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.offcanvas__wrapper .offcanvas__content .offcanvas__contact ul li .offcanvas__contact-icon i {
+  color: var(--pp-theme);
+  font-size: 14px;
+}
+
+/* CTA Demo Button */
+.offcanvas__wrapper .offcanvas__content .offcanvas__contact .header-button {
+  margin-top: 20px;
+}
+.offcanvas__wrapper .offcanvas__content .offcanvas__contact .header-button .pp-theme-btn {
+  width: 100%;
+  text-align: center;
+  padding: 14px 24px;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+/* Social icons */
+.offcanvas__wrapper .offcanvas__content .offcanvas__contact .social-icon {
+  margin-top: 20px;
+  gap: 8px;
+}
+.offcanvas__wrapper .offcanvas__content .offcanvas__contact .social-icon a {
+  width: 38px;
+  height: 38px;
+  line-height: 38px;
+  border-radius: 8px;
+  background: rgba(21, 101, 192, 0.07);
+  color: var(--pp-theme);
+  font-size: 14px;
+  transition: all 0.25s ease;
+}
+.offcanvas__wrapper .offcanvas__content .offcanvas__contact .social-icon a:hover {
+  background: var(--pp-theme);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Responsive: narrow screens */
+@media (max-width: 450px) {
+  .offcanvas__info {
+    width: 100vw;
+    border-left: none;
+    border-top: 3px solid var(--pp-theme);
+  }
+  .offcanvas__wrapper {
+    padding: 20px 18px;
+  }
+}
+
+/* ============================================================
+   3. PRICING SECTION — BLUE TICK ICONS
+   Replace inline purple-tinted SVG check icons with a clean
+   CSS-based blue checkmark approach so they respect the theme
+   ============================================================ */
+
+/* Pricing list item base */
+.pp-pricing-main-item .pp-pricing-card-item .pp-pricing-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--pp-header);
+  font-size: 15px;
+}
+
+/* The img (cheak.svg / cheak-2.svg) — tint with CSS filter for blue */
+.pp-pricing-main-item .pp-pricing-card-item .pp-pricing-list li img {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  /* Converts the SVG to the theme blue #1565C0 */
+  filter: invert(24%) sepia(93%) saturate(1100%) hue-rotate(199deg) brightness(90%) contrast(95%);
+}
+
+/* Disabled/inactive items — greyed out */
+.pp-pricing-main-item .pp-pricing-card-item .pp-pricing-list li.pp-style-2 {
+  color: #9ca3af;
+}
+.pp-pricing-main-item .pp-pricing-card-item .pp-pricing-list li.pp-style-2 img {
+  filter: grayscale(1) opacity(0.4);
+}
+
+/* Pricing card hover lift */
+.pp-pricing-main-item:hover {
+  transform: translateY(-12px);
+}
+
+/* Monthly/Yearly toggle buttons — blue active state */
+.pp-pricing-section .nav .nav-link.active {
+  color: var(--pp-white);
+}
+.pp-pricing-section .nav .nav-link.active::after {
+  background: linear-gradient(270deg, #1976D2 0%, #1565C0 100%);
+  right: 8px;
+}
+.pp-pricing-section .nav .nav-link::before {
+  border-color: var(--pp-theme);
+}
+
+/* ============================================================
+   4. GENERAL BLUE THEME POLISH — remaining accent cleanups
+   ============================================================ */
+
+/* Blog post blockquote sidebar accent */
+.pp-news-details-wrapper .pp-news-details-content .pp-sideber {
+  border-left-color: var(--pp-theme);
+}
+
+/* Blog category tag badge */
+.pp-news-card-item-2 .pp-news-image span {
+  background: #EBF3FF;
+}
+
+/* Preloader spinner border (blue instead of purple) */
+.animation-preloader .spinner {
+  border-top-color: var(--pp-theme);
+}
+
+/* Back-to-top button */
+.pp-back-to-top {
+  background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
+}
+
+/* Sub-title pills / badges */
+.pp-sub-title {
+  color: var(--pp-theme);
+}
+
+/* Section heading underline accent color */
+.pp-section-title h2 span,
+.pp-section-title .highlight {
+  color: var(--pp-theme);
+}
+
+/* Feature list checkmarks */
+.pp-feature-list li::before {
+  color: var(--pp-theme);
+}
+
+/* Offer box hover border */
+.pp-offer-box-item:hover {
+  border-color: var(--pp-theme);
+}
+
+/* How-it-works step number */
+.pp-how-work-items h6 {
+  color: var(--pp-theme);
+}
+
+/* CTA section theme-bg background */
+.theme-bg {
+  background: linear-gradient(135deg, #0D1B3E 0%, #1565C0 100%);
+}
+
+/* Section bg-2 (dark sections) */
+.section-bg-2 {
+  background: #0D1B3E;
+}
+
+/* Testimonial card quote mark */
+.pp-testimonial-card::before {
+  color: var(--pp-theme);
+}
+
+/* ============================================================
+   5. MOBILE RESPONSIVENESS SAFEGUARDS
+   ============================================================ */
+
+/* Ensure the CTA button in header doesn't show on small screens */
+@media (max-width: 1199px) {
+  .header-1 .header-right .pp-theme-btn {
+    display: none;
+  }
+  .header__hamburger {
+    display: flex !important;
+  }
+}
+
+/* At xl+ the hamburger is hidden */
+@media (min-width: 1200px) {
+  .header__hamburger {
+    display: none !important;
+  }
+  .offcanvas__info,
+  .offcanvas__overlay {
+    display: none !important;
+  }
+}
+
+/* Ensure header right has proper gap on mobile */
+@media (max-width: 575px) {
+  .header-main .header-right {
+    gap: 12px;
+  }
+  .offcanvas__info {
+    width: 100vw;
+  }
+}
+
+/* ============================================================
+   6. LOGO ALIGNMENT
+   Ensure the newly enlarged 55px logo is perfectly centered
+   ============================================================ */
+.header-1 .logo, .header-logo, .pp-footer-logo {
+  display: flex !important;
+  align-items: center !important;
+}
+.header-1 .logo img, .header-logo img, .pp-footer-logo img {
+  display: block;
+}
+/* Fix for inner page footers to prevent upward bleeding blue block */
+.flat-footer::before { top: 0 !important; }
