@@ -1,13 +1,7 @@
 {
-  "name": "letxerp-portfolio-website",
+  "name": "letxerp-portfolio",
   "compatibility_date": "2026-07-24",
   "assets": {
-    "directory": ".",
-    "exclude": [
-      "node_modules/**",
-      ".git/**",
-      "*.md",
-      "*.py"
-    ]
+    "directory": "."
   }
 }
