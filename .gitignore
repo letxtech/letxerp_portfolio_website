@@ -1,4 +1,10 @@
 # Node dependencies
+
+
+node_modules/
+.wrangler/
+
+
 node_modules/
 
 # Wrangler
