@@ -4,6 +4,8 @@ node_modules/
 # Wrangler
 .wrangler/
 
+
+
 # Environment variables
 .env
 .env.*
