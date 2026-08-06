@@ -1,4 +1,4 @@
-﻿/*
+/*
  * LetX ERP - Custom Overrides
  * Mobile Navbar Enhancement + Pricing Ticks + Blue Theme Polish
  * ---------------------------------------------------------------
@@ -497,3 +497,8 @@
 }
 /* Fix for inner page footers to prevent upward bleeding blue block */
 .flat-footer::before { top: 0 !important; }
+
+/* Hero section background to match CTA section */
+.pp-hero-1::before {
+  background: linear-gradient(135deg, #0D1B3E 0%, #1565C0 100%) !important;
+}
