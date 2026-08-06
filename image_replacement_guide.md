@@ -5,7 +5,7 @@ This document lists all the placeholder template images currently used on your `
 I have purposefully excluded small UI elements like checkmarks, UI background shapes, and SVG icons since those are part of the core design. 
 
 ## How to replace them
-Simply copy your new images into the specified folders, ensure they have the exact same filename (e.g. `hero-1.jpg`), and overwrite the existing ones. Maintaining the same approximate aspect ratio for your new images will ensure the layout doesnot stretch or break.
+Simply copy your new images into the specified folders, ensure they have the exact same filename (e.g. `hero-1.jpg`), and overwrite the existing ones. Maintaining the same approximate aspect ratio for your new images will ensure the layout doesnt stretch or break.
 
 ---
 
