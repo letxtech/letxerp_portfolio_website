@@ -3,12 +3,46 @@
 
   var config = window.LETX_SITE_CONFIG || {};
 
+  function cleanValue(value) {
+    return String(value || "").trim();
+  }
+
   function digitsOnly(value) {
-    return String(value || "").replace(/\D/g, "");
+    return cleanValue(value).replace(/\D/g, "");
+  }
+
+  function phoneHref(value) {
+    var phone = cleanValue(value);
+
+    if (!phone) {
+      return "";
+    }
+
+    if (phone.charAt(0) === "+") {
+      return "tel:+" + digitsOnly(phone);
+    }
+
+    return "tel:" + digitsOnly(phone);
+  }
+
+  function whatsappHref(value, message) {
+    var digits = digitsOnly(value);
+
+    if (!digits) {
+      return "";
+    }
+
+    return "https://wa.me/" + digits + (message ? "?text=" + encodeURIComponent(message) : "");
+  }
+
+  function disableLink(node) {
+    node.setAttribute("href", "#");
+    node.setAttribute("aria-disabled", "true");
+    node.classList.add("is-disabled");
   }
 
   function getValue(field) {
-    return config[field] || "";
+    return cleanValue(config[field]);
   }
 
   function applyText() {
@@ -34,19 +68,28 @@
 
     Array.prototype.forEach.call(nodes, function (node) {
       var type = node.getAttribute("data-site-href");
+      var href = "";
 
       if (type === "phone") {
-        node.setAttribute("href", "tel:" + digitsOnly(config.phoneNumber));
+        href = phoneHref(config.phoneNumber);
       }
 
       if (type === "email") {
-        node.setAttribute("href", "mailto:" + getValue("email"));
+        href = getValue("email") ? "mailto:" + getValue("email") : "";
       }
 
       if (type === "whatsapp") {
-        node.setAttribute("href", "https://wa.me/" + digitsOnly(config.whatsappNumber));
+        href = whatsappHref(config.whatsappNumber);
         node.setAttribute("target", "_blank");
         node.setAttribute("rel", "noopener");
+      }
+
+      if (href) {
+        node.setAttribute("href", href);
+        node.removeAttribute("aria-disabled");
+        node.classList.remove("is-disabled");
+      } else {
+        disableLink(node);
       }
     });
   }
@@ -82,10 +125,13 @@
         }
 
         var text = message || defaultMessage;
-        var url = "https://wa.me/" + digitsOnly(config.whatsappNumber) + "?text=" + encodeURIComponent(text);
+        var url = whatsappHref(config.whatsappNumber, text);
 
         event.preventDefault();
-        window.open(url, "_blank", "noopener");
+
+        if (url) {
+          window.open(url, "_blank", "noopener");
+        }
       });
     });
   }
