@@ -23,11 +23,10 @@
     return "blog-detail.html?slug=" + encodeURIComponent(blog.slug);
   }
 
-  function renderHomeCard(blog, index) {
-    var delay = index * 300;
+  function renderHomeCard(blog) {
     return [
       '<div class="news-block col-md-4 col-sm-6 col-xs-12">',
-      '<div class="inner-box wow fadeInLeft" data-wow-delay="' + delay + 'ms" data-wow-duration="1500ms">',
+      '<div class="inner-box">',
       '<div class="image"><a href="' + detailUrl(blog) + '"><img src="' + escapeHtml(blog.cover) + '" alt="' + escapeHtml(blog.title) + '" /></a></div>',
       '<div class="lower-content">',
       '<h3><a href="' + detailUrl(blog) + '">' + escapeHtml(blog.title) + "</a></h3>",

@@ -1429,6 +1429,11 @@ a.is-disabled {
   min-height: 78px;
 }
 
+.news-section .news-block .inner-box {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
 .blog-page-section .news-block-two .inner-box {
   height: 100%;
 }

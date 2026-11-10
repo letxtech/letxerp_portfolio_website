@@ -170,10 +170,26 @@
     });
   }
 
+  function applyCopyright() {
+    var year = new Date().getFullYear();
+    var nodes = document.querySelectorAll(".copyright");
+    Array.prototype.forEach.call(nodes, function (node) {
+      node.innerHTML = "Copyright &copy; " + year + " LetX Technologies. All rights reserved.";
+    });
+
+    var createdNodes = document.querySelectorAll(".created");
+    Array.prototype.forEach.call(createdNodes, function (node) {
+      if (node.textContent.includes("Theme Arc")) {
+        node.textContent = "LetX ERP";
+      }
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     applyText();
     applyLinks();
     applyMaps();
     applyWhatsappForms();
+    applyCopyright();
   });
 })();
