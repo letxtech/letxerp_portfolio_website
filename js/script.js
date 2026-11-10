@@ -324,6 +324,80 @@
 		wow.init();
 	}
 
+	// Modern Mobile Navigation Controller
+	function initMobileNavigation() {
+		var $toggle = $('.main-menu .navbar-toggle');
+		var $collapse = $('.main-header .navbar-collapse');
+		var $backdrop = $('.letx-mobile-backdrop');
+
+		if (!$backdrop.length) {
+			$backdrop = $('<div class="letx-mobile-backdrop" aria-hidden="true"></div>').appendTo('body');
+		}
+
+		// Ensure mobile CTA button exists inside .letx-primary-nav
+		$('.letx-primary-nav').each(function() {
+			var $nav = $(this);
+			if (!$nav.find('.letx-mobile-cta-box').length) {
+				var $cta = $(
+					'<div class="letx-mobile-cta-box visible-xs">' +
+						'<a href="#" data-site-href="whatsapp" target="_blank" rel="noopener" class="theme-btn btn-style-one">Book a Demo</a>' +
+					'</div>'
+				);
+				$nav.append($cta);
+				if (window.LETX_SITE_CONFIG && window.LETX_SITE_CONFIG.whatsappNumber) {
+					var rawNumber = String(window.LETX_SITE_CONFIG.whatsappNumber).replace(/\D/g, "");
+					if (rawNumber) {
+						$cta.find('a').attr('href', 'https://wa.me/' + rawNumber);
+					}
+				}
+			}
+		});
+
+		function openMenu() {
+			$toggle.addClass('is-active').attr('aria-expanded', 'true');
+			$backdrop.addClass('is-active');
+			$('body').addClass('letx-menu-open');
+		}
+
+		function closeMenu() {
+			$toggle.removeClass('is-active').attr('aria-expanded', 'false');
+			$backdrop.removeClass('is-active');
+			$('body').removeClass('letx-menu-open');
+			if ($collapse.hasClass('in')) {
+				$collapse.collapse('hide');
+			}
+		}
+
+		$collapse.on('show.bs.collapse', function() {
+			openMenu();
+		});
+
+		$collapse.on('hide.bs.collapse', function() {
+			closeMenu();
+		});
+
+		$backdrop.on('click', function(e) {
+			e.preventDefault();
+			closeMenu();
+		});
+
+		// Close menu when tapping any nav link on mobile
+		$('.main-header .navbar-collapse .navigation a, .letx-mobile-cta-box a').on('click', function() {
+			if ($(window).width() <= 767) {
+				closeMenu();
+			}
+		});
+
+		// Close on Escape key
+		$(document).on('keydown', function(e) {
+			if (e.keyCode === 27 && $('body').hasClass('letx-menu-open')) {
+				closeMenu();
+			}
+		});
+	}
+
+	initMobileNavigation();
+
 /* ==========================================================================
    When document is Scrollig, do
    ========================================================================== */

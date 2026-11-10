@@ -26,7 +26,8 @@
   function inlineMarkdown(value) {
     return escapeHtml(value)
       .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-      .replace(/\*(.*?)\*/g, "<em>$1</em>");
+      .replace(/\*(.*?)\*/g, "<em>$1</em>")
+      .replace(/\[([^\]]+)\]\(([^\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
   }
 
   function markdownToHtml(markdown) {
@@ -176,8 +177,103 @@
     ].join("");
   }
 
+
+  function syncContentfulPortfolio() {
+    var config = window.LETX_CONTENTFUL_CONFIG;
+    if (!config || !config.spaceId || !config.accessToken || typeof fetch !== "function") {
+      return;
+    }
+
+    var url = "https://cdn.contentful.com/spaces/" + encodeURIComponent(config.spaceId) +
+              "/environments/" + encodeURIComponent(config.environment || "master") +
+              "/entries?access_token=" + encodeURIComponent(config.accessToken) +
+              "&include=2";
+
+    fetch(url)
+      .then(function (res) { return res.ok ? res.json() : null; })
+      .then(function (data) {
+        if (!data || !Array.isArray(data.items)) return;
+
+        var assetsMap = {};
+        if (data.includes && Array.isArray(data.includes.Asset)) {
+          data.includes.Asset.forEach(function (a) {
+            var id = a.sys && a.sys.id;
+            var u = a.fields && a.fields.file && a.fields.file.url;
+            if (id && u) assetsMap[id] = u.indexOf("//") === 0 ? "https:" + u : u;
+          });
+        }
+
+        var cfPortfolio = [];
+        data.items.forEach(function (item) {
+          var type = item.sys && item.sys.contentType && item.sys.contentType.sys.id;
+          var f = item.fields || {};
+          if (type === "erp_portfolio") {
+            var coverRef = f.cover || f.coverImage;
+            var coverUrl = "images/letx/portfolio-cover.png";
+            if (coverRef) {
+              if (typeof coverRef === "string") {
+                coverUrl = coverRef.indexOf("//") === 0 ? "https:" + coverRef : coverRef;
+              } else if (coverRef.sys && assetsMap[coverRef.sys.id]) {
+                coverUrl = assetsMap[coverRef.sys.id];
+              }
+            }
+
+            var rawDate = f.date || f.publishDate || (item.sys && item.sys.createdAt) || "";
+            var dateStr = rawDate.indexOf("T") !== -1 ? rawDate.split("T")[0] : rawDate;
+            var keywords = Array.isArray(f.keywords) ? f.keywords : (typeof f.keywords === "string" ? f.keywords.split(",").map(function(s){return s.trim();}).filter(Boolean) : []);
+
+            cfPortfolio.push({
+              title: f.title || "Untitled Project",
+              slug: f.slug || item.sys.id,
+              client: f.client || f.title || "LetX Client",
+              industry: f.industry || "Business Solutions",
+              package: f.package || f.projectType || "ERP",
+              solution: f.solution || f.projectType || f.industry || "Custom ERP Solution",
+              date: dateStr,
+              status: f.status || "Implemented",
+              description: f.description || "",
+              keywords: keywords,
+              cover: coverUrl,
+              content: typeof f.content === "string" ? f.content : "",
+              source: "contentful"
+            });
+          }
+        });
+
+        if (!cfPortfolio.length) return;
+
+        var seenSlugs = {};
+        var merged = [];
+        cfPortfolio.forEach(function (p) {
+          if (p.slug && !seenSlugs[p.slug]) {
+            seenSlugs[p.slug] = true;
+            merged.push(p);
+          }
+        });
+        projects.forEach(function (p) {
+          if (p.slug && !seenSlugs[p.slug]) {
+            seenSlugs[p.slug] = true;
+            merged.push(p);
+          }
+        });
+
+        projects = merged.sort(function (a, b) {
+          return new Date(b.date).getTime() - new Date(a.date).getTime();
+        });
+        window.LETX_PORTFOLIO = projects;
+
+        // Re-render UI
+        renderList();
+        renderDetail();
+      })
+      .catch(function () {
+        // Silently retain static manifest
+      });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     renderList();
     renderDetail();
+    syncContentfulPortfolio();
   });
 })();

@@ -1,0 +1,212 @@
+LETX ERP - BRAND NOTES (DETAILED)
+Use this file as the main source of facts, tone and structure for every blog and portfolio case study.
+Only use facts written here. If something is not here, do not invent it. Ask me instead.
+
+=====================================================================
+1. COMPANY PROFILE
+=====================================================================
+Company name: LetX Technologies
+Brand name: LetX ERP
+Website: letxerp.com
+Headquarters: Colombo 08, Sri Lanka
+Branch office: United Arab Emirates (UAE)
+Experience: 5+ years in ERP, Odoo and POS solutions
+Customers: businesses worldwide. Offices in Sri Lanka and the UAE, support available worldwide.
+
+What we do:
+LetX ERP designs, builds, customizes and implements ERP software, Odoo ERP and Cloud POS systems for businesses of every size.
+
+Our mission:
+To help every business adopt an ERP system, from a small food truck to a large manufacturing company, so they can save time, control stock, track sales and make decisions from accurate real-time data.
+
+What makes us different:
+- We serve every industry and both very small and very large businesses.
+- We give best-in-class support to customers worldwide.
+- We provide high-level Odoo ERP implementation and customization.
+- We have in-house Odoo consultants.
+- We guide customers step by step, from planning to rollout and support.
+- We have successful implementations. Readers can see more on our website (letxerp.com), so blogs can point to the Portfolio page for examples.
+
+=====================================================================
+2. TARGET AUDIENCE
+=====================================================================
+Primary readers:
+- Owners and managers of small and medium businesses
+- People who are NOT technical and are new to ERP
+- Business owners deciding whether they need an ERP or POS system
+
+Secondary readers:
+- Managers of larger companies and manufacturers looking for a full ERP rollout
+- Business owners comparing Odoo with other options
+
+What they want:
+- Save time and reduce manual work
+- Control inventory and avoid stock losses
+- Track sales, expenses and profit accurately
+- See clear, real-time reports
+- Manage multiple branches in one system
+- Know what an ERP costs in effort and how rollout works (without us quoting prices)
+
+Their common problems:
+- Using Excel sheets, paper records or several disconnected tools
+- Stock mismatches and missing items
+- Slow or wrong reports
+- Difficulty managing many branches or staff
+- Not knowing where to start with ERP
+
+=====================================================================
+3. INDUSTRIES WE SERVE
+=====================================================================
+We serve every industry. Examples to use in blogs (not a limit):
+- Restaurants, cafes and food trucks
+- Retail shops and supermarkets
+- Hardware shops
+- Motor parts shops
+- Manufacturing companies (small to large)
+- Supply chain, warehouse and logistics
+- Trading and distribution
+- Services, healthcare, education, construction and any other business
+Write for the industry I name. Never say "we do not serve" an industry.
+
+=====================================================================
+4. PRODUCTS AND PACKAGES
+=====================================================================
+Our ERP packages are exactly these four:
+- Desktop POS
+- Essential
+- Core
+- Advanced
+
+Rules:
+- Do not mention any other package names (no Starter ERP, no Odoo Pro, no Desktop ERP).
+- Do not list exact features, limits or prices for a package unless I provide them. Describe them in general terms (Desktop POS for simple point-of-sale needs, Essential for core daily operations, Core for growing businesses, Advanced for larger or more complex operations) and invite readers to see letxerp.com or contact us for details.
+- Odoo ERP and Cloud POS are services we provide (see section 5), not package names.
+
+=====================================================================
+5. SERVICES
+=====================================================================
+- ERP software development and implementation
+- Odoo ERP implementation, customization and integration
+- Odoo consulting (in-house Odoo consultants)
+- Cloud POS setup for restaurants and retail
+- Business process analysis and ERP planning
+- Data migration from Excel or old systems
+- Staff training and onboarding
+- Best-in-class support for customers worldwide, before and after go-live
+
+Typical rollout steps (use when explaining our process):
+1. Understand the business and its needs
+2. Plan the ERP scope and modules
+3. Set up and customize the system
+4. Migrate existing data
+5. Train the staff
+6. Go live
+7. Support and improve
+
+=====================================================================
+6. MAIN FEATURES WE TALK ABOUT
+=====================================================================
+- Inventory and stock control
+- Sales, quotations and billing
+- Purchasing and supplier management
+- Accounting and finance reports
+- Multi-branch management
+- POS for restaurants and retail
+- Manufacturing and production planning
+- Warehouse and fleet management (for logistics)
+- Staff accounts and role-based permissions
+- Real-time dashboards and reports
+- Customer management
+
+=====================================================================
+7. TONE OF VOICE
+=====================================================================
+- Professional but friendly
+- Simple words and short sentences
+- Practical and helpful, never pushy or salesy
+- Explain ideas with real business examples (restaurant, hardware shop, factory)
+- Written like an experienced consultant explaining to a business owner
+- Confident but honest, with no exaggerated promises
+- Write in clear international English suitable for Sri Lanka and UAE readers
+
+=====================================================================
+8. WORDS AND PHRASES TO USE
+=====================================================================
+ERP system, business management software, inventory control, real-time reports, multi-branch, cloud POS, Odoo ERP, Odoo consultants, implementation, rollout, step by step, streamline operations, accurate stock, business growth
+
+=====================================================================
+9. THINGS TO AVOID
+=====================================================================
+- Do not invent clients, case studies, numbers, percentages, prices, awards or testimonials
+- Do not promise specific results (for example "increase profit by 40%")
+- Do not name or criticise competitors
+- Do not use heavy technical jargon (explain it simply if needed)
+- No clickbait titles
+- Do not quote package prices
+
+=====================================================================
+10. CALL TO ACTION (END OF EVERY BLOG)
+=====================================================================
+Invite the reader to contact LetX ERP for a free consultation or demo. Use a friendly line, then the contact details:
+
+WhatsApp: +94 77 993 6763
+Email: info@letxtech.com
+Website: letxerp.com (see our Portfolio page for successful projects)
+Main office: Colombo 08, Sri Lanka
+Branch: UAE
+
+Example closing:
+"Ready to bring order to your business? Contact LetX ERP for a free consultation. Message us on WhatsApp at +94 77 993 6763 or email info@letxtech.com, and see our successful projects at letxerp.com."
+
+=====================================================================
+11. BLOG GUIDELINES
+=====================================================================
+Length: about 800 words unless told otherwise
+Structure:
+- Short introduction that states the problem the reader has
+- 4 to 6 sections with ## headings and practical advice
+- Use bullet lists for steps, checklists and benefits
+- Short conclusion with the call to action above
+
+Blog categories (use exactly one):
+- ERP Planning
+- Odoo ERP
+- ERP Packages
+- Cloud POS
+- Industry Insights
+
+Good blog topic types:
+- "X signs your business needs an ERP"
+- How to choose an ERP / POS for a specific industry
+- ERP implementation steps and common mistakes
+- Odoo vs spreadsheets (never name competitor software)
+- Inventory control tips
+- Multi-branch management tips
+- How Cloud POS helps restaurants and retail
+
+=====================================================================
+12. SEO GUIDELINES
+=====================================================================
+- Put the main keyword in the title, the first paragraph and at least one ## heading
+- Use keywords naturally, no stuffing
+- Description: 150 to 200 characters, include the main keyword and a clear benefit
+- Keywords field: 4 to 8 short lowercase keywords
+- Mention Sri Lanka, the UAE or worldwide support only when natural and relevant
+- Slug: short, lowercase, hyphen separated, based on the title
+
+=====================================================================
+13. PORTFOLIO (CASE STUDY) GUIDELINES
+=====================================================================
+Length: 300 to 400 words
+Structure (use these exact ## headings):
+## Overview
+- Who the client is and what their business does
+## The Challenge
+- The problems they had before the ERP
+## What We Delivered
+- Bullet list of what LetX ERP implemented
+## Result
+- Only outcomes I provide. If none are given, keep it general and qualitative (for example: better visibility, organised stock, reliable reports). Never add numbers.
+
+Fields I will give for each portfolio: client name, industry, ERP package (Desktop POS, Essential, Core or Advanced), solution, status (default "Implemented"), and the main points delivered.
+If a client name, package or solution is missing, ask me one short question before writing.

@@ -61,7 +61,8 @@
   function inlineMarkdown(value) {
     return escapeHtml(value)
       .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-      .replace(/\*(.*?)\*/g, "<em>$1</em>");
+      .replace(/\*(.*?)\*/g, "<em>$1</em>")
+      .replace(/\[([^\]]+)\]\(([^\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
   }
 
   function markdownToHtml(markdown) {
@@ -210,9 +211,103 @@
     ].join("");
   }
 
+
+  function syncContentfulBlogs() {
+    var config = window.LETX_CONTENTFUL_CONFIG;
+    if (!config || !config.spaceId || !config.accessToken || typeof fetch !== "function") {
+      return;
+    }
+
+    var url = "https://cdn.contentful.com/spaces/" + encodeURIComponent(config.spaceId) +
+              "/environments/" + encodeURIComponent(config.environment || "master") +
+              "/entries?access_token=" + encodeURIComponent(config.accessToken) +
+              "&include=2";
+
+    fetch(url)
+      .then(function (res) { return res.ok ? res.json() : null; })
+      .then(function (data) {
+        if (!data || !Array.isArray(data.items)) return;
+
+        var assetsMap = {};
+        if (data.includes && Array.isArray(data.includes.Asset)) {
+          data.includes.Asset.forEach(function (a) {
+            var id = a.sys && a.sys.id;
+            var u = a.fields && a.fields.file && a.fields.file.url;
+            if (id && u) assetsMap[id] = u.indexOf("//") === 0 ? "https:" + u : u;
+          });
+        }
+
+        var cfBlogs = [];
+        data.items.forEach(function (item) {
+          var type = item.sys && item.sys.contentType && item.sys.contentType.sys.id;
+          var f = item.fields || {};
+          if (type === "erp_blogs") {
+            var coverRef = f.cover || f.coverImage;
+            var coverUrl = "images/letx/blog-cover.png";
+            if (coverRef) {
+              if (typeof coverRef === "string") {
+                coverUrl = coverRef.indexOf("//") === 0 ? "https:" + coverRef : coverRef;
+              } else if (coverRef.sys && assetsMap[coverRef.sys.id]) {
+                coverUrl = assetsMap[coverRef.sys.id];
+              }
+            }
+
+            var rawDate = f.date || f.publishDate || (item.sys && item.sys.createdAt) || "";
+            var dateStr = rawDate.indexOf("T") !== -1 ? rawDate.split("T")[0] : rawDate;
+            var keywords = Array.isArray(f.keywords) ? f.keywords : (typeof f.keywords === "string" ? f.keywords.split(",").map(function(s){return s.trim();}).filter(Boolean) : []);
+
+            cfBlogs.push({
+              title: f.title || "Untitled Blog",
+              slug: f.slug || item.sys.id,
+              date: dateStr,
+              author: f.author || "LetX Technologies",
+              category: f.category || "ERP",
+              description: f.description || "",
+              keywords: keywords,
+              cover: coverUrl,
+              content: typeof f.content === "string" ? f.content : "",
+              source: "contentful"
+            });
+          }
+        });
+
+        if (!cfBlogs.length) return;
+
+        // Merge Contentful items with baseline manifest
+        var seenSlugs = {};
+        var merged = [];
+        cfBlogs.forEach(function (b) {
+          if (b.slug && !seenSlugs[b.slug]) {
+            seenSlugs[b.slug] = true;
+            merged.push(b);
+          }
+        });
+        blogs.forEach(function (b) {
+          if (b.slug && !seenSlugs[b.slug]) {
+            seenSlugs[b.slug] = true;
+            merged.push(b);
+          }
+        });
+
+        blogs = merged.sort(function (a, b) {
+          return new Date(b.date).getTime() - new Date(a.date).getTime();
+        });
+        window.LETX_BLOGS = blogs;
+
+        // Re-render UI
+        renderLists();
+        renderDetail();
+        renderRecentSidebar();
+      })
+      .catch(function () {
+        // Silently retain static manifest
+      });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     renderLists();
     renderDetail();
     renderRecentSidebar();
+    syncContentfulBlogs();
   });
 })();

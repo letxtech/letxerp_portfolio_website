@@ -1,7 +1,7 @@
 window.LETX_SITE_CONFIG = {
   phoneNumber: "+94779936763",
   whatsappNumber: "+94779936763",
-  email: "erp@letxtech.com",
+  email: "info@letxtech.com",
   headOffice: "Colombo 08, Sri Lanka",
   branch: "Saga, UAE",
   branch2: "",

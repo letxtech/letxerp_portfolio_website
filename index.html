@@ -41,7 +41,7 @@
                         <!-- Main Menu -->
                         <nav class="main-menu">
                             <div class="navbar-header">
-                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".letx-primary-nav">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".letx-primary-nav" aria-expanded="false" aria-label="Toggle mobile menu">
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
@@ -56,6 +56,9 @@
                                     <li><a href="blog-2.html">Blog</a></li>
                                     <li><a href="contact.html">Contact Us</a></li>
                                 </ul>
+                                <div class="letx-mobile-cta-box visible-xs">
+                                    <a href="#" data-site-href="whatsapp" target="_blank" rel="noopener" class="theme-btn btn-style-one">Book a Demo</a>
+                                </div>
                             </div>
                         </nav>
                         <!-- Main Menu End-->
@@ -107,43 +110,96 @@
     
     <!--LetX Hero-->
     <section class="letx-hero-code" data-letx-hero>
-        <div class="letx-hero-bg"></div>
+        <div class="letx-hero-bg" aria-hidden="true">
+            <div class="letx-hero-spotlight"></div>
+            <div class="letx-hero-glow letx-hero-glow-1"></div>
+            <div class="letx-hero-glow letx-hero-glow-2"></div>
+            <div class="letx-hero-glow letx-hero-glow-3"></div>
+        </div>
         <div class="auto-container">
             <div class="letx-hero-slides">
                 <div class="letx-hero-slide active" data-letx-hero-slide>
                     <div class="letx-hero-content">
-                        <div class="letx-hero-kicker">ERP solutions for growing businesses</div>
-                        <h1>Run Sales, Stock, Finance & Operations in One Place</h1>
-                        <p>LetX ERP connects sales, inventory, accounts, HR, approvals, and reporting through Starter ERP and Odoo ERP packages.</p>
+                        <div class="letx-hero-badge">
+                            <span class="letx-badge-text">Next-Gen Enterprise ERP</span>
+                            <!-- <span class="letx-badge-arrow">&rarr;</span> -->
+                        </div>
+                        <h1>Run Sales, Stock & Finance <span class="letx-gradient-text">All in One System</span></h1>
+                        <p>LetX ERP connects sales, inventory, accounts, HR, approvals, and reporting through modern Desktop, Cloud, and Enterprise ERP packages.</p>
                         <div class="letx-hero-actions">
                             <a href="#" data-site-href="whatsapp" target="_blank" rel="noopener" class="theme-btn btn-style-four">Book a Demo</a>
                             <a href="price.html" class="theme-btn btn-style-five">View Packages</a>
                         </div>
                     </div>
                     <div class="letx-hero-visual">
+                        <div class="letx-visual-card letx-card-left">
+                            <span class="letx-card-icon">&#10003;</span>
+                            <div>
+                                <strong>Live Operations</strong>
+                                <small>Sales &bull; Stock &bull; Accounts</small>
+                            </div>
+                        </div>
                         <img class="letx-hero-desktop-img" src="images/letx/hero-laptop-erp-workflow.png" alt="LetX ERP workflow dashboard">
                         <img class="letx-hero-mobile-img" src="images/letx/hero-mobile-erp.png" alt="LetX ERP mobile dashboard">
+                        <div class="letx-visual-card letx-card-right">
+                            <span class="letx-card-icon">&#9889;</span>
+                            <div>
+                                <strong>Real-time Sync</strong>
+                                <small>Instant Approvals &amp; Reports</small>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="letx-hero-slide" data-letx-hero-slide>
                     <div class="letx-hero-content">
-                        <div class="letx-hero-kicker">Starter ERP and Odoo ERP packages</div>
-                        <h1>Choose a Lightweight Start or a Full Odoo ERP Rollout</h1>
-                        <p>Start with essential controls, then scale into Odoo modules, custom workflows, reports, integrations, and support.</p>
+                        <div class="letx-hero-badge">
+                            <span class="letx-badge-text">Modular &amp; Enterprise ERP Packages</span>
+                            <!-- <span class="letx-badge-arrow">&rarr;</span> -->
+                        </div>
+                        <h1>Scale Your Operations with <span class="letx-gradient-text">Modular ERP Power</span></h1>
+                        <p>Start with essential controls, then scale seamlessly into custom modules, live reporting, integrated workflows, and ongoing enterprise support.</p>
                         <div class="letx-hero-actions">
                             <a href="price.html" class="theme-btn btn-style-four">Compare Packages</a>
                             <a href="contact.html" class="theme-btn btn-style-five">Talk to LetX</a>
                         </div>
                     </div>
                     <div class="letx-hero-visual">
+                        <div class="letx-visual-card letx-card-left">
+                            <span class="letx-card-icon">&#10003;</span>
+                            <div>
+                                <strong>Modular Suite</strong>
+                                <small>CRM &bull; POS &bull; HR &bull; Supply</small>
+                            </div>
+                        </div>
                         <img class="letx-hero-desktop-img" src="images/letx/hero-laptop-erp-modules.png" alt="LetX ERP module dashboard">
-                        <img class="letx-hero-mobile-img" src="images/letx/hero-mobile-odoo.png" alt="Odoo ERP mobile modules dashboard">
+                        <img class="letx-hero-mobile-img" src="images/letx/hero-mobile-odoo.png" alt="Modular ERP mobile modules dashboard">
+                        <div class="letx-visual-card letx-card-right">
+                            <span class="letx-card-icon">&#128737;</span>
+                            <div>
+                                <strong>Enterprise Scale</strong>
+                                <small>Full Cloud &amp; Local Support</small>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="letx-hero-controls" aria-label="Hero slider controls">
-                <button type="button" data-letx-hero-prev aria-label="Previous slide"><span class="fa fa-angle-left"></span></button>
-                <button type="button" data-letx-hero-next aria-label="Next slide"><span class="fa fa-angle-right"></span></button>
+            <div class="letx-hero-controls-wrap">
+                <div class="letx-hero-controls letx-hero-control-capsule" role="region" aria-label="Hero slider transition controls">
+                    <button type="button" class="letx-hero-nav-btn letx-hero-prev-btn" data-letx-hero-prev aria-label="Previous slide" title="Previous slide">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    </button>
+                    <div class="letx-hero-indicators" data-letx-hero-indicators aria-label="Hero slide indicators">
+                        <button type="button" class="letx-hero-pill active" data-letx-hero-indicator="0" aria-label="Slide 1: Operations Overview" title="Slide 1">
+                            <span class="letx-hero-pill-progress"></span>
+                        </button>
+                        <button type="button" class="letx-hero-pill" data-letx-hero-indicator="1" aria-label="Slide 2: Modular Enterprise" title="Slide 2">
+                            <span class="letx-hero-pill-progress"></span>
+                        </button>
+                    </div>
+                    <button type="button" class="letx-hero-nav-btn letx-hero-next-btn" data-letx-hero-next aria-label="Next slide" title="Next slide">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </button>
+                </div>
             </div>
         </div>
     </section>
@@ -215,7 +271,7 @@
                     data-textalign="['top','top','top','top']"
                     data-frames='[{"from":"y:[40%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1200,"to":"o:1;","delay":1100,"ease":"Power3.easeInOut"},{"delay":"wait","speed":900,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]'
                     style="z-index: 7; white-space: normal;">
-                        <div class="hero-subtitle">LetX ERP connects sales, inventory, accounts, HR, approvals, and reporting through Starter ERP and Odoo ERP packages.</div>
+                        <div class="hero-subtitle">LetX ERP connects sales, inventory, accounts, HR, approvals, and reporting through modern Desktop, Cloud, and Enterprise ERP packages.</div>
                     </div>
                     
                     <div class="tp-caption tp-resizeme" 
@@ -285,7 +341,7 @@
                     data-textalign="['top','top','top','top']"
                     data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]'
                     style="z-index: 20; white-space: nowrap;">
-                    	<div class="title alternate text-center">Starter ERP and Odoo ERP packages</div>
+                    	<div class="title alternate text-center">Cloud and Enterprise ERP Packages</div>
                     </div>
                     
                     <div class="tp-caption" 
@@ -305,7 +361,7 @@
                     data-textalign="['top','top','top','top']"
                     data-frames='[{"from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]'
                     style="z-index: 30; white-space: nowrap;">
-                    	<h2 class="text-center">Choose a Lightweight Start or a Full Odoo ERP Rollout</h2>
+                    	<h2 class="text-center">Choose a Lightweight Start or a Full Enterprise ERP Rollout</h2>
                     </div>
 
                     <div class="tp-caption tp-resizeme"
@@ -325,7 +381,7 @@
                     data-textalign="['top','top','top','top']"
                     data-frames='[{"from":"y:[40%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1200,"to":"o:1;","delay":1100,"ease":"Power3.easeInOut"},{"delay":"wait","speed":900,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]'
                     style="z-index: 7; white-space: normal;">
-                        <div class="hero-subtitle">Start with essential controls, then scale into Odoo modules, custom workflows, reports, integrations, and support.</div>
+                        <div class="hero-subtitle">Start with essential controls, then scale into advanced modules, custom workflows, reports, integrations, and support.</div>
                     </div>
                     
                     <div class="tp-caption tp-resizeme" 
@@ -369,7 +425,7 @@
                     style="z-index: 3; pointer-events: none;">
                     	<figure class="content-image image-1">
                             <img class="hero-image-desktop" src="images/letx/hero-laptop-erp-modules.png" alt="LetX ERP modules inside laptop">
-                            <img class="hero-image-mobile" src="images/letx/hero-mobile-odoo.png" alt="Odoo ERP mobile modules dashboard">
+                            <img class="hero-image-mobile" src="images/letx/hero-mobile-odoo.png" alt="Enterprise ERP mobile modules dashboard">
                         </figure>
                     </div>
                     
@@ -403,8 +459,8 @@
                     	<div class="icon-box">
                         	<span class="icon flaticon-diamond-1"></span>
                         </div>
-                        <h3><a href="price.html">Odoo ERP</a></h3>
-                        <div class="text">Implementation, customization, migration, training, and support for businesses ready to run on Odoo.</div>
+                        <h3><a href="price.html">Managed Enterprise ERP</a></h3>
+                        <div class="text">Implementation, customization, migration, training, and support for businesses ready to scale.</div>
                     </div>
                 </div>
                 
@@ -457,11 +513,11 @@
                 <div class="content-column pull-right col-md-6 col-sm-12 col-xs-12">
                 	<div class="inner-column">
                     	<h2>Two Clear ERP Paths</h2>
-                        <div class="styled-text">Start lean with our Starter ERP or scale with a full Odoo ERP implementation.</div>
-                        <div class="text">Starter ERP is ideal when you need a fast, simple operational system. Odoo ERP is the main LetX ERP package for deeper workflows, multi-department control, integrations, and long-term growth.</div>
+                        <div class="styled-text">Start lean with our Desktop &amp; Essential packages or scale with our managed Core &amp; Enterprise ERP implementations.</div>
+                        <div class="text">Essential ERP is ideal when you need a fast, intuitive cloud system. Our Core and Advanced packages deliver deeper workflows, multi-department control, integrations, and long-term enterprise growth.</div>
                         <ul class="list-style-one">
                         	<li>Starter ERP for fast adoption and essential controls</li>
-                            <li>Odoo ERP for complete, customizable business management</li>
+                            <li>Core &amp; Advanced ERP for complete, customizable business management</li>
                             <li>Implementation, training, reporting, and ongoing support</li>
                         </ul>
                     </div>
@@ -550,7 +606,7 @@
                         	<span class="icon flaticon-business-1"></span>
                         </div>
                         <h3>Expert ERP Team</h3>
-                        <div class="text">Work with a team that understands ERP planning, Odoo configuration, process mapping, training, and long-term improvements.</div>
+                        <div class="text">Work with a team that understands ERP planning, tailored configuration, process mapping, training, and long-term improvements.</div>
                     </div>
                 </div>
                 
@@ -599,99 +655,129 @@
     </section>
     <!--End Services Section-->
     
-    <!--Price Section-->
-    <section class="price-section">
+        <!--Price Section-->
+    <section class="price-section" id="pricing">
     	<div class="auto-container">
             <div class="sec-title centered">
-            	<h2>ERP Packages</h2>
-                <div class="text">Choose a lightweight start or a scalable Odoo rollout. Final pricing can be adjusted based on users, modules, customization, and support scope.</div>
+            	<h2>ERP Packages &amp; Pricing</h2>
+                <div class="text">Choose the perfect solution for your business&mdash;from a 100% offline desktop POS to high-performance cloud ERP and tailored enterprise solutions.</div>
             </div>
             <div class="pricing-toggle" data-pricing-toggle>
                 <button type="button" class="active" data-pricing-mode="monthly">Monthly</button>
-                <button type="button" data-pricing-mode="annual">Annual</button>
+                <button type="button" data-pricing-mode="annual">Annually</button>
             </div>
-            <div class="row clearfix">
+            <div class="row clearfix price-cards-row">
             	
-                <!--Price Block-->
+                <!--Price Block: Desktop-->
                 <div class="price-block col-md-3 col-sm-6 col-xs-12">
-                	<div class="inner-box" data-monthly-price="$149" data-annual-price="$1,609">
+                	<div class="inner-box" data-billing-type="one-time" data-monthly-price="$119" data-annual-price="$119" data-price-suffix="/one-time">
                     	<div class="upper-box">
-                        	<div class="title">Starter ERP</div>
-                            <div class="sub-title">Our Basic Custom ERP</div>
+                        	<div class="title">Desktop</div>
+                            <div class="sub-title">100% Offline POS System</div>
                         </div>
-                        <div class="price"><sup></sup><span class="pricing-amount">$149</span><sub>/mo</sub></div>
-                        <ul>
-                        	<li>Basic custom ERP setup</li>
-                            <li>Sales and invoicing essentials</li>
-                            <li>Inventory starter controls</li>
-                            <li>Simple customer records</li>
-                            <li>Basic reports and training</li>
+                        <div class="price">
+                            <span class="price-tag-sub">One-Time Payment</span>
+                            <div class="price-value-row">
+                                <span class="pricing-amount">$119</span><sub class="pricing-period">/one-time</sub>
+                            </div>
+                        </div>
+                        <div class="price-badge-note">Single Payment &bull; 1 Device</div>
+                        <ul class="price-features-list">
+                        	<li><span class="check-icon">&#10003;</span> 100% Offline POS</li>
+                            <li><span class="check-icon">&#10003;</span> One-Time Payment</li>
+                            <li><span class="check-icon">&#10003;</span> Single Device License</li>
+                            <li><span class="check-icon">&#10003;</span> Installation Support Included</li>
                         </ul>
-                        <a href="#" data-site-href="whatsapp" target="_blank" rel="noopener" class="theme-btn buy-btn">Book a Demo</a>
+                        <div class="pricing-clarification-note">Fixed one-time price. No recurring fees.</div>
+                        <div class="btn-box">
+                            <a href="#" data-site-href="whatsapp" target="_blank" rel="noopener" class="theme-btn buy-btn">Get Desktop POS</a>
+                        </div>
                     </div>
                 </div>
                 
-                <!--Price Block-->
+                <!--Price Block: Essential-->
                 <div class="price-block col-md-3 col-sm-6 col-xs-12">
-                	<div class="inner-box" data-monthly-price="$279" data-annual-price="$3,013">
+                	<div class="inner-box" data-billing-type="subscription" data-monthly-price="$11" data-annual-price="$91" data-price-suffix="/mo">
                     	<div class="upper-box">
-                        	<div class="title">Odoo Starter</div>
-                            <div class="sub-title">Basic Odoo Setup</div>
+                        	<div class="title">Essential</div>
+                            <div class="sub-title">Complete Cloud ERP &amp; POS</div>
                         </div>
-                        <div class="price"><sup></sup><span class="pricing-amount">$279</span><sub>/mo</sub></div>
-                        <ul>
-                        	<li>Core Odoo installation</li>
-                            <li>Standard module configuration</li>
-                            <li>Basic business workflows</li>
-                            <li>Starter data support</li>
-                            <li>User onboarding session</li>
+                        <div class="price">
+                            <span class="price-tag-sub">Starting from</span>
+                            <div class="price-value-row">
+                                <span class="pricing-amount">$11</span><sub class="pricing-period">/mo</sub>
+                            </div>
+                        </div>
+                        <div class="price-badge-note setup-included">Starting Price &bull; Setup Included</div>
+                        <ul class="price-features-list">
+                        	<li><span class="check-icon">&#10003;</span> Complete Cloud ERP &amp; POS</li>
+                            <li><span class="check-icon">&#10003;</span> Multi-Branch Management</li>
+                            <li><span class="check-icon">&#10003;</span> Sales, Stock &amp; Invoicing</li>
+                            <li><span class="check-icon">&#10003;</span> Accounting &amp; Staff HR Tools</li>
                         </ul>
-                        <a href="#" data-site-href="whatsapp" target="_blank" rel="noopener" class="theme-btn buy-btn">Book a Demo</a>
+                        <div class="pricing-clarification-note">*Final price depends on branches, users &amp; hosting.</div>
+                        <div class="btn-box">
+                            <a href="#" data-site-href="whatsapp" target="_blank" rel="noopener" class="theme-btn buy-btn">Start Essential</a>
+                        </div>
                     </div>
                 </div>
                 
-                <!--Price Block-->
+                <!--Price Block: Core-->
                 <div class="price-block col-md-3 col-sm-6 col-xs-12">
-                	<div class="inner-box" data-monthly-price="$479" data-annual-price="$5,173">
+                	<div class="inner-box" data-billing-type="subscription" data-monthly-price="$19" data-annual-price="$169" data-price-suffix="/mo">
                     	<div class="upper-box">
-                        	<div class="title">Odoo Pro</div>
-                            <div class="sub-title">Customized Addons</div>
+                        	<div class="title">Core</div>
+                            <div class="sub-title">Managed &amp; Customized ERP</div>
                         </div>
-                        <div class="price"><sup></sup><span class="pricing-amount">$479</span><sub>/mo</sub></div>
-                        <ul>
-                        	<li>Multi-module rollout</li>
-                            <li>Custom addon planning</li>
-                            <li>Approval workflow setup</li>
-                            <li>Advanced reporting</li>
-                            <li>Priority implementation support</li>
+                        <div class="price">
+                            <span class="price-tag-sub">Starting from</span>
+                            <div class="price-value-row">
+                                <span class="pricing-amount">$19</span><sub class="pricing-period">/mo</sub>
+                            </div>
+                        </div>
+                        <div class="price-badge-note init-fee">Starting Price &bull; +$359 Initial Setup</div>
+                        <ul class="price-features-list">
+                        	<li><span class="check-icon">&#10003;</span> Customized ERP Workflows</li>
+                            <li><span class="check-icon">&#10003;</span> Managed Cloud Hosting</li>
+                            <li><span class="check-icon">&#10003;</span> Dedicated Setup &amp; Onboarding</li>
+                            <li><span class="check-icon">&#10003;</span> Flexible Modular Extensions</li>
                         </ul>
-                        <a href="#" data-site-href="whatsapp" target="_blank" rel="noopener" class="theme-btn buy-btn">Book a Demo</a>
+                        <div class="pricing-clarification-note">*Final price depends on custom models, users &amp; support.</div>
+                        <div class="btn-box">
+                            <a href="#" data-site-href="whatsapp" target="_blank" rel="noopener" class="theme-btn buy-btn">Deploy Core</a>
+                        </div>
                     </div>
                 </div>
                 
-                <!--Price Block-->
+                <!--Price Block: Advanced-->
                 <div class="price-block col-md-3 col-sm-6 col-xs-12">
-                	<div class="inner-box" data-monthly-price="$849" data-annual-price="$9,169">
+                	<div class="inner-box" data-billing-type="custom" data-custom-label="Contact Our Team" data-monthly-price="Contact Our Team" data-annual-price="Contact Our Team" data-price-suffix="">
                     	<div class="upper-box">
-                        	<div class="title">Odoo Ultra</div>
-                            <div class="sub-title">Complete ERP Rollout</div>
+                        	<div class="title">Advanced</div>
+                            <div class="sub-title">Full-Scale Enterprise Suite</div>
                         </div>
-                        <div class="price"><sup></sup><span class="pricing-amount">$849</span><sub>/mo</sub></div>
-                        <ul>
-                        	<li>Full Odoo rollout planning</li>
-                            <li>Advanced departments and roles</li>
-                            <li>Deep customization support</li>
-                            <li>Integrations and reporting</li>
-                            <li>Dedicated launch assistance</li>
+                        <div class="price price-contact">
+                            <span class="price-tag-sub">Bespoke Scope</span>
+                            <div class="price-value-row">
+                                <span class="pricing-amount contact-text">Contact Our Team</span><sub class="pricing-period"></sub>
+                            </div>
+                        </div>
+                        <div class="price-badge-note enterprise-note">Enterprise-Level Capabilities</div>
+                        <ul class="price-features-list">
+                        	<li><span class="check-icon">&#10003;</span> Enterprise Capabilities</li>
+                            <li><span class="check-icon">&#10003;</span> Advanced Business Management</li>
+                            <li><span class="check-icon">&#10003;</span> Tailored Solutions &amp; Modules</li>
+                            <li><span class="check-icon">&#10003;</span> Dedicated Assistance &amp; SLA</li>
                         </ul>
-                        <a href="#" data-site-href="whatsapp" target="_blank" rel="noopener" class="theme-btn buy-btn">Book a Demo</a>
+                        <div class="pricing-clarification-note">*Bespoke quotation based on specific requirements.</div>
+                        <div class="btn-box">
+                            <a href="#" data-site-href="whatsapp" target="_blank" rel="noopener" class="theme-btn buy-btn">Talk to Team</a>
+                        </div>
                     </div>
                 </div>
-                
             </div>
         </div>
     </section>
-    <!--End Price Section-->
     
     <!--Testimonial Section-->
     <section class="testimonial-section" style="background-image:url(images/background/2.jpg)">
@@ -748,7 +834,7 @@
                         </div>
                         <div class="content">
                         	<h3>Room to Scale</h3>
-                        	<div class="text">Start with essential modules and expand into Odoo workflows as your departments and reporting needs grow.</div>
+                        	<div class="text">Start with essential modules and expand into advanced ERP workflows as your departments and reporting needs grow.</div>
                         </div>
                     </div>
                 </div>
@@ -763,7 +849,7 @@
     	<div class="auto-container">
         	<div class="sec-title centered">
             	<h2>ERP Insights</h2>
-                <div class="text">Useful guides for businesses planning digital operations, Odoo adoption, and ERP improvements.</div>
+                <div class="text">Useful guides for businesses planning digital operations, cloud adoption, and ERP improvements.</div>
             </div>
             <div class="row clearfix" data-blog-list="latest" data-blog-limit="3"></div>
         </div>
@@ -774,7 +860,7 @@
     <section class="emailed-section">
     	<div class="auto-container">
         	<h2>Start Your ERP Conversation</h2>
-            <div class="text">Tell us what you need to manage, and LetX Technologies will help you choose between Starter ERP and Odoo ERP.</div>
+            <div class="text">Tell us what you need to manage, and LetX Technologies will help you choose the ideal ERP package for your team.</div>
             <!--Subscribe Form / Style Two-->
             <div class="subscribe-form style-two">
                 <form data-whatsapp-message-form data-default-message="Hi LetX Technologies, I want to discuss LetX ERP.">
@@ -807,7 +893,7 @@
                                     </div>
                                     <div class="text">
                                     	<p>LetX ERP is an ERP solution by LetX Technologies for businesses that need better control over operations, sales, inventory, accounts, HR, and reporting.</p>
-                                        <p>Choose Starter ERP for a lightweight start or Odoo ERP for a complete, scalable rollout.</p>
+                                        <p>Choose Desktop or Essential ERP for a lightweight start, or Core and Advanced ERP for a complete, scalable rollout.</p>
                                     </div>
                                 </div>
                             </div>
@@ -918,6 +1004,7 @@
 <script src="js/site-config-apply.js"></script>
 <script src="js/letx-hero.js"></script>
 <script src="js/pricing-toggle.js"></script>
+<script src="js/contentful-config.js"></script>
 <script src="js/blog-manifest.js"></script>
 <script src="js/blog-renderer.js"></script>
 <script src="js/script.js"></script>
