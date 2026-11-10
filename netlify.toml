@@ -1,3 +1,7 @@
 [build]
   command = "node scripts/generate-content-manifests.js"
   publish = "."
+
+[build.environment]
+  SECRETS_SCAN_OMIT_KEYS = "CONTENTFUL_ENVIRONMENT,CONTENTFUL_ACCESS_TOKEN,CONTENTFUL_SPACE_ID"
+  SECRETS_SCAN_ENABLED = "false"
