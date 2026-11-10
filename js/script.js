@@ -326,16 +326,16 @@
 
 	// Modern Mobile Navigation Controller
 	function initMobileNavigation() {
-		var $toggle = $('.main-menu .navbar-toggle');
-		var $collapse = $('.main-header .navbar-collapse');
+		var $toggles = $('.main-menu .navbar-toggle');
+		var $collapses = $('.main-header .navbar-collapse');
 		var $backdrop = $('.letx-mobile-backdrop');
 
 		if (!$backdrop.length) {
 			$backdrop = $('<div class="letx-mobile-backdrop" aria-hidden="true"></div>').appendTo('body');
 		}
 
-		// Ensure mobile CTA button exists inside .letx-primary-nav
-		$('.letx-primary-nav').each(function() {
+		// Ensure mobile CTA button exists inside mobile navigation
+		$('.main-header .navbar-collapse').each(function() {
 			var $nav = $(this);
 			if (!$nav.find('.letx-mobile-cta-box').length) {
 				var $cta = $(
@@ -344,53 +344,75 @@
 					'</div>'
 				);
 				$nav.append($cta);
-				if (window.LETX_SITE_CONFIG && window.LETX_SITE_CONFIG.whatsappNumber) {
-					var rawNumber = String(window.LETX_SITE_CONFIG.whatsappNumber).replace(/\D/g, "");
-					if (rawNumber) {
-						$cta.find('a').attr('href', 'https://wa.me/' + rawNumber);
-					}
-				}
 			}
 		});
 
+		// Hydrate WhatsApp destination if configured
+		if (window.LETX_SITE_CONFIG && window.LETX_SITE_CONFIG.whatsappNumber) {
+			var rawNumber = String(window.LETX_SITE_CONFIG.whatsappNumber).replace(/\D/g, "");
+			if (rawNumber) {
+				$('.letx-mobile-cta-box a[data-site-href="whatsapp"]').attr('href', 'https://wa.me/' + rawNumber);
+			}
+		}
+
+		var isOpen = false;
+
 		function openMenu() {
-			$toggle.addClass('is-active').attr('aria-expanded', 'true');
+			isOpen = true;
+			$toggles.addClass('is-active').attr('aria-expanded', 'true');
+			$collapses.addClass('is-open in');
 			$backdrop.addClass('is-active');
 			$('body').addClass('letx-menu-open');
 		}
 
 		function closeMenu() {
-			$toggle.removeClass('is-active').attr('aria-expanded', 'false');
+			isOpen = false;
+			$toggles.removeClass('is-active').attr('aria-expanded', 'false');
+			$collapses.removeClass('is-open in');
 			$backdrop.removeClass('is-active');
 			$('body').removeClass('letx-menu-open');
-			if ($collapse.hasClass('in')) {
-				$collapse.collapse('hide');
+		}
+
+		function toggleMenu(e) {
+			if (e) {
+				e.preventDefault();
+				e.stopPropagation();
+			}
+			if (isOpen) {
+				closeMenu();
+			} else {
+				openMenu();
 			}
 		}
 
-		$collapse.on('show.bs.collapse', function() {
-			openMenu();
+		// Disarm Bootstrap's collapse plugin data-api on navbar toggles to avoid height-calc/animation deadlocks
+		$toggles.removeAttr('data-toggle').off('click.letxNav').on('click.letxNav', function(e) {
+			toggleMenu(e);
 		});
 
-		$collapse.on('hide.bs.collapse', function() {
-			closeMenu();
-		});
-
-		$backdrop.on('click', function(e) {
+		$backdrop.off('click.letxNav').on('click.letxNav', function(e) {
 			e.preventDefault();
+			e.stopPropagation();
 			closeMenu();
 		});
 
-		// Close menu when tapping any nav link on mobile
-		$('.main-header .navbar-collapse .navigation a, .letx-mobile-cta-box a').on('click', function() {
+		// Close menu smoothly when tapping any nav link on mobile
+		$('.main-header .navbar-collapse .navigation a, .letx-mobile-cta-box a').off('click.letxNav').on('click.letxNav', function() {
 			if ($(window).width() <= 767) {
 				closeMenu();
 			}
 		});
 
 		// Close on Escape key
-		$(document).on('keydown', function(e) {
-			if (e.keyCode === 27 && $('body').hasClass('letx-menu-open')) {
+		$(document).off('keydown.letxNav').on('keydown.letxNav', function(e) {
+			if (e.keyCode === 27 && isOpen) {
+				closeMenu();
+			}
+		});
+
+		// Automatically close on viewport resize to desktop
+		$(window).off('resize.letxNav').on('resize.letxNav', function() {
+			if ($(window).width() > 767 && isOpen) {
 				closeMenu();
 			}
 		});

@@ -194,11 +194,13 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-right: 0;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .letx-hero-visual img {
   display: block;
+  margin: 0 auto;
   width: min(880px, 92vw);
   max-width: 100%;
   height: auto;
@@ -355,9 +357,6 @@
   animation: letxHeroImageFadeIn 2000ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.letx-hero-slide.active .letx-visual-card {
-  animation: letxHeroCardFadeIn 1600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
 
 @keyframes letxHeroSlideFadeIn {
   0% {
@@ -383,16 +382,6 @@
   }
 }
 
-@keyframes letxHeroCardFadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
 @media only screen and (max-width: 1199px) {
   .letx-hero-slide {
@@ -958,10 +947,14 @@ a.is-disabled {
     background: rgba(255, 255, 255, 0.06) !important;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    cursor: pointer;
+    cursor: pointer !important;
     outline: none !important;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    position: relative !important;
+    z-index: 100000 !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
   }
 
   .main-menu .navbar-header .navbar-toggle:hover,
@@ -1012,11 +1005,11 @@ a.is-disabled {
   /* Body scroll lock when mobile navigation is active */
   body.letx-menu-open {
     overflow: hidden !important;
-    touch-action: none;
   }
 
   /* Rich Floating Glassmorphic Mobile Drawer */
   .main-menu .navbar-collapse {
+    display: block !important;
     position: fixed !important;
     top: 74px !important;
     left: 12px !important;
@@ -1038,6 +1031,13 @@ a.is-disabled {
     -webkit-backdrop-filter: blur(24px) !important;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 30px rgba(0, 210, 255, 0.12) !important;
     margin: 0 !important;
+
+    /* Hardware-accelerated smooth transitions */
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transform: translateY(-8px) scale(0.98) !important;
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s ease !important;
   }
 
   /* Sleek custom scrollbar for smooth internal scrolling */
@@ -1052,9 +1052,14 @@ a.is-disabled {
     border-radius: 4px;
   }
 
+  .main-menu .navbar-collapse.is-open,
   .main-menu .navbar-collapse.collapse.in,
   .main-menu .navbar-collapse.collapsing {
     display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: translateY(0) scale(1) !important;
   }
 
   .main-menu .navbar-collapse > .navigation {
@@ -1226,9 +1231,12 @@ a.is-disabled {
   }
 
   .letx-hero-visual {
-    width: 100%;
-    margin-top: 2px;
-    margin-right: 0;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    margin: 12px auto 0 !important;
+    text-align: center !important;
   }
 
   .letx-hero-visual img {
@@ -1242,7 +1250,11 @@ a.is-disabled {
 
   .letx-hero-mobile-img {
     display: block !important;
+    margin: 0 auto !important;
     width: min(310px, 78vw) !important;
+    max-width: 100% !important;
+    height: auto !important;
+    filter: drop-shadow(0 18px 36px rgba(0, 0, 0, 0.38)) !important;
   }
 
   .letx-hero-controls {
@@ -2358,7 +2370,29 @@ a.is-disabled {
   border-radius: 12px;
   border: 1px solid rgba(7, 87, 200, 0.14);
   box-shadow: 0 12px 35px rgba(3, 27, 63, 0.05);
-  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto !important;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.letx-comparison-table-wrapper::-webkit-scrollbar {
+  height: 6px;
+}
+
+.letx-comparison-table-wrapper::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 6px;
+}
+
+.letx-comparison-table-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(7, 87, 200, 0.28);
+  border-radius: 6px;
+}
+
+.letx-comparison-table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: var(--letx-blue);
 }
 
 .letx-comparison-table {
@@ -2499,6 +2533,40 @@ a.is-disabled {
     grid-template-columns: 1fr;
     gap: 20px;
   }
+  /* Horizontal scrolling and sticky feature label column for comparison table */
+  .letx-comparison-table-wrapper {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    border-radius: 10px !important;
+    margin-bottom: 24px !important;
+  }
+
+  .letx-comparison-table {
+    min-width: 700px !important;
+    width: 100% !important;
+    margin-bottom: 0 !important;
+  }
+
+  .letx-comparison-table thead tr th.feature-col,
+  .letx-comparison-table tbody tr:not(.cat-header) td:first-child {
+    position: sticky !important;
+    left: 0 !important;
+    background: #ffffff !important;
+    z-index: 2 !important;
+    box-shadow: 3px 0 8px rgba(3, 27, 63, 0.08);
+  }
+
+  .letx-comparison-table thead tr th.feature-col {
+    background: var(--letx-navy) !important;
+    z-index: 3 !important;
+  }
+
+  .letx-comparison-table tbody tr.cat-header td {
+    position: sticky !important;
+    left: 0 !important;
+    z-index: 1 !important;
+    background: #f1f5f9 !important;
+  }
 }
 
 @media only screen and (max-width: 767px) {
@@ -2632,15 +2700,6 @@ a.is-disabled {
     color: #556980 !important;
   }
 
-  .package-header-right {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: stretch !important;
-    gap: 10px !important;
-    width: 100% !important;
-    margin-top: 2px !important;
-  }
-
   .package-price-box {
     text-align: left !important;
     background: #f8fafc;
@@ -2747,8 +2806,10 @@ a.is-disabled {
   -webkit-backdrop-filter: blur(4px);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.28s ease;
   pointer-events: none;
+  cursor: pointer;
+  touch-action: manipulation;
 }
 
 .letx-mobile-backdrop.is-active {
@@ -2760,6 +2821,14 @@ a.is-disabled {
 @media only screen and (min-width: 768px) {
   body {
     padding-top: 0 !important;
+  }
+
+  .main-menu .navbar-collapse {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: none !important;
+    transition: none !important;
   }
 }
 
