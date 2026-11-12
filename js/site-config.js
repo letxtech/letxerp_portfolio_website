@@ -2,8 +2,8 @@ window.LETX_SITE_CONFIG = {
   phoneNumber: "+94779936763",
   whatsappNumber: "+94779936763",
   email: "info@letxtech.com",
-  headOffice: "Colombo 08, Sri Lanka",
-  branch: "Saga, UAE",
+  headOffice: "Turnor Road, Colombo 08, Sri Lanka",
+  branch: "Dubai, UAE",
   branch2: "",
   mapPoints: {
     headOffice: {

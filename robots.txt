@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /content_template_soruce/
+Disallow: /scripts/
+
+Sitemap: https://letxerp.com/sitemap.xml

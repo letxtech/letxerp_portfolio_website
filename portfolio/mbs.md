@@ -3,29 +3,29 @@ title: "MBS"
 slug: "mbs"
 client: "MBS"
 industry: "Hardware"
-package: "Odoo Starter"
+package: "Core"
 solution: "Hardware Business ERP"
 date: "2026-08-24"
 status: "Implemented"
-description: "Odoo Starter implementation for MBS, supporting hardware business operations with core ERP setup and essential workflow configuration."
-keywords: ["Hardware ERP", "Odoo Starter", "LetX ERP", "Business ERP"]
+description: "Core Odoo ERP implementation for MBS, supporting hardware business operations with sales, purchasing, inventory workflows, and structured reporting."
+keywords: ["Hardware ERP", "Core Odoo ERP", "Odoo Implementation", "Sri Lanka ERP", "LetX ERP"]
 cover: "images/letx/portfolio-cover.png"
 ---
 
 # MBS
 
-MBS required an ERP setup that could support hardware business operations with clearer product, sales, purchasing, and stock handling.
+MBS required an ERP setup that could support hardware business operations with clearer product catalogs, sales, purchasing, and stock handling.
 
-LetX ERP delivered an Odoo Starter implementation to help the business begin with a structured ERP foundation while keeping the first phase simple and manageable.
+LetX ERP delivered a [Core Odoo implementation](price.html#core-detail) to establish a managed, structured ERP foundation tailored around core hardware workflows while keeping launch practical for daily users.
 
 ## What We Delivered
 
-- Core Odoo setup
+- Managed Core Odoo setup and configuration
 - Hardware product and stock workflow support
-- Basic sales and purchasing configuration
-- User onboarding and guidance
-- Starter reporting visibility
+- Sales and purchasing process alignment
+- Team onboarding and rollout guidance
+- Operational reporting visibility
 
 ## Result
 
-MBS gained a practical Odoo ERP starting point for managing hardware operations with better structure, cleaner records, and room to expand.
+MBS gained a dependable Core Odoo ERP foundation for managing hardware operations with cleaner inventory records, better process control, and room to expand. Reviewing whether your business is ready to move off spreadsheets? Read [How to Know Your Business Is Ready for ERP](blog-detail.html?slug=erp-readiness-guide) or [book an Odoo consultation](contact.html).

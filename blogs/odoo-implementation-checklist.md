@@ -13,7 +13,7 @@ cover: "images/letx/blog-cover.png"
 
 A smooth Odoo ERP project starts before configuration begins. The more clearly your business explains its current workflows, approval steps, data structure, and reporting needs, the faster the implementation team can shape the system around real work.
 
-LetX Technologies supports Odoo ERP rollouts by helping teams prepare the practical details that matter.
+[LetX Technologies](about.html) supports Odoo ERP rollouts by helping teams prepare the practical details that matter across our [Core](price.html#core-detail) and [Advanced](price.html#advanced-detail) tiers.
 
 ## Prepare your current processes
 
@@ -31,8 +31,8 @@ ERP success depends on users. Decide who approves workflows, who enters data, wh
 
 ## Prepare your reports
 
-List the dashboards and reports management needs most. This helps the implementation focus on outcomes, not only screens and modules.
+List the dashboards and reports management needs most. This helps the implementation focus on outcomes, not only screens and modules—as shown in our Odoo deployments for [MBS](portfolio-detail.html?slug=mbs) and [Maxpolanka](portfolio-detail.html?slug=maxpolanka).
 
 ## Final thought
 
-Odoo implementation works best when business knowledge and technical setup move together. That is where LetX Technologies guides the process from planning to rollout.
+Odoo implementation works best when business knowledge and technical setup move together. Compare our [Odoo & ERP packages](price.html) or [contact our Colombo team](contact.html) to plan your rollout from discovery to launch.

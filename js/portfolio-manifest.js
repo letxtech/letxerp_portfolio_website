@@ -1,42 +1,23 @@
 window.LETX_PORTFOLIO = [
   {
-    "title": "Alpha Logistics ERP",
-    "slug": "alpha-logistics-erp",
-    "client": "Alpha Logistics",
-    "industry": "Supply Chain & Logistics",
-    "package": "Core",
-    "solution": "Warehouse & Fleet Management",
-    "date": "2026-11-10",
-    "status": "Implemented",
-    "description": "End-to-end cloud ERP rollout for warehouse operations and real-time fleet logistics tracking.",
-    "keywords": [
-      "logistics",
-      "warehouse",
-      "fleet",
-      "erp"
-    ],
-    "cover": "images/letx/portfolio-cover.png",
-    "content": "## Alpha Logistics ERP\n\nAlpha Logistics partnered with LetX ERP for a comprehensive ERP rollout.\n\n## What We Delivered\n\n- Warehouse inventory sync\n- Multi-branch logistics reporting\n- Fleet expense workflows\n\n## Result\n\nFull operational visibility achieved with zero manual spreadsheet reconciliation.\n",
-    "source": "contentful"
-  },
-  {
     "title": "NFM Kitchen",
     "slug": "nfm-kitchen",
     "client": "NFM Kitchen",
     "industry": "Restaurant",
-    "package": "Starter ERP",
+    "package": "Essential",
     "solution": "Restaurant ERP POS",
     "date": "2026-08-31",
     "status": "Implemented",
-    "description": "Starter ERP implementation for NFM Kitchen, focused on restaurant POS, sales tracking, item control, and daily operational visibility.",
+    "description": "Essential cloud ERP and restaurant POS implementation for NFM Kitchen, focused on daily sales tracking, item control, and operational visibility.",
     "keywords": [
       "Restaurant ERP",
-      "Starter ERP",
-      "POS",
+      "Essential ERP",
+      "Cloud POS",
+      "Sri Lanka ERP",
       "LetX ERP"
     ],
     "cover": "images/letx/portfolio-cover.png",
-    "content": "# NFM Kitchen\r\n\r\nNFM Kitchen needed a lightweight ERP approach for restaurant operations, POS activity, daily sales tracking, and clearer control over items used in the business.\r\n\r\nLetX ERP supported the client with a Starter ERP rollout focused on practical restaurant workflows. The goal was to keep the system simple, fast for users, and useful for daily decision-making.\r\n\r\n## What We Delivered\r\n\r\n- Restaurant POS workflow setup\r\n- Sales and item tracking structure\r\n- Basic stock visibility for daily operations\r\n- User-friendly screens for fast adoption\r\n- Training and rollout guidance\r\n\r\n## Result\r\n\r\nNFM Kitchen received a focused Starter ERP foundation that helps the team manage restaurant sales and daily activity with better visibility and less manual tracking.",
+    "content": "# NFM Kitchen\n\nNFM Kitchen needed a practical cloud ERP and POS approach for restaurant operations, daily sales tracking, and clearer control over menu and kitchen items used in the business.\n\nLetX ERP supported the client with an [Essential package](price.html#essential-detail) rollout focused on reliable restaurant POS workflows. The goal was to keep the system fast for staff, accessible across operations, and useful for daily decision-making.\n\n## What We Delivered\n\n- Restaurant POS workflow setup on the Essential tier\n- Sales and item tracking structure\n- Basic stock visibility for daily operations\n- User-friendly screens for fast team adoption\n- Training and rollout guidance\n\n## Result\n\nNFM Kitchen received a focused Essential ERP foundation that helps the team manage restaurant sales and daily activity with better visibility and less manual tracking. Evaluating restaurant billing software? Read [5 Signs Your Restaurant Needs a POS System](blog-detail.html?slug=5-signs-your-restaurant-needs-a-pos-system) or [contact our team](contact.html) for a WhatsApp demo.",
     "source": "markdown"
   },
   {
@@ -44,19 +25,20 @@ window.LETX_PORTFOLIO = [
     "slug": "mbs",
     "client": "MBS",
     "industry": "Hardware",
-    "package": "Odoo Starter",
+    "package": "Core",
     "solution": "Hardware Business ERP",
     "date": "2026-08-24",
     "status": "Implemented",
-    "description": "Odoo Starter implementation for MBS, supporting hardware business operations with core ERP setup and essential workflow configuration.",
+    "description": "Core Odoo ERP implementation for MBS, supporting hardware business operations with sales, purchasing, inventory workflows, and structured reporting.",
     "keywords": [
       "Hardware ERP",
-      "Odoo Starter",
-      "LetX ERP",
-      "Business ERP"
+      "Core Odoo ERP",
+      "Odoo Implementation",
+      "Sri Lanka ERP",
+      "LetX ERP"
     ],
     "cover": "images/letx/portfolio-cover.png",
-    "content": "# MBS\r\n\r\nMBS required an ERP setup that could support hardware business operations with clearer product, sales, purchasing, and stock handling.\r\n\r\nLetX ERP delivered an Odoo Starter implementation to help the business begin with a structured ERP foundation while keeping the first phase simple and manageable.\r\n\r\n## What We Delivered\r\n\r\n- Core Odoo setup\r\n- Hardware product and stock workflow support\r\n- Basic sales and purchasing configuration\r\n- User onboarding and guidance\r\n- Starter reporting visibility\r\n\r\n## Result\r\n\r\nMBS gained a practical Odoo ERP starting point for managing hardware operations with better structure, cleaner records, and room to expand.",
+    "content": "# MBS\n\nMBS required an ERP setup that could support hardware business operations with clearer product catalogs, sales, purchasing, and stock handling.\n\nLetX ERP delivered a [Core Odoo implementation](price.html#core-detail) to establish a managed, structured ERP foundation tailored around core hardware workflows while keeping launch practical for daily users.\n\n## What We Delivered\n\n- Managed Core Odoo setup and configuration\n- Hardware product and stock workflow support\n- Sales and purchasing process alignment\n- Team onboarding and rollout guidance\n- Operational reporting visibility\n\n## Result\n\nMBS gained a dependable Core Odoo ERP foundation for managing hardware operations with cleaner inventory records, better process control, and room to expand. Reviewing whether your business is ready to move off spreadsheets? Read [How to Know Your Business Is Ready for ERP](blog-detail.html?slug=erp-readiness-guide) or [book an Odoo consultation](contact.html).",
     "source": "markdown"
   },
   {
@@ -64,19 +46,20 @@ window.LETX_PORTFOLIO = [
     "slug": "maxpolanka",
     "client": "Maxpolanka",
     "industry": "Motor Parts Shop",
-    "package": "Odoo Pro",
+    "package": "Core",
     "solution": "Motor Parts ERP",
     "date": "2026-08-17",
     "status": "Implemented",
-    "description": "Odoo Pro implementation for Maxpolanka, a motor parts shop, with stronger workflow customization, inventory control, and reporting support.",
+    "description": "Core Odoo ERP implementation and workflow customization for Maxpolanka, a motor parts shop, covering inventory control, sales processes, and reporting.",
     "keywords": [
       "Motor Parts ERP",
-      "Odoo Pro",
+      "Core Odoo ERP",
+      "Odoo Customization",
       "Inventory ERP",
       "LetX ERP"
     ],
     "cover": "images/letx/portfolio-cover.png",
-    "content": "# Maxpolanka\r\n\r\nMaxpolanka needed an ERP setup for a motor parts shop where product records, inventory movement, sales activity, and reporting needed stronger control.\r\n\r\nLetX ERP supported the business with an Odoo Pro rollout focused on custom workflows, practical inventory visibility, and a better operating structure for daily users.\r\n\r\n## What We Delivered\r\n\r\n- Odoo Pro implementation planning\r\n- Motor parts inventory workflow support\r\n- Sales and customer process configuration\r\n- Custom addon and reporting guidance\r\n- Training and implementation support\r\n\r\n## Result\r\n\r\nMaxpolanka received a scalable ERP setup that supports motor parts operations with improved stock visibility, workflow control, and reporting readiness.",
+    "content": "# Maxpolanka\n\nMaxpolanka needed an ERP setup for a motor parts shop where SKU records, stock movement, sales activity, and management reporting required stronger control.\n\nLetX ERP supported the business with a [Core Odoo rollout](price.html#core-detail) focused on tailored workflows, practical inventory visibility, and a reliable operating structure for daily users.\n\n## What We Delivered\n\n- Core Odoo implementation planning and configuration\n- Motor parts inventory workflow customization\n- Sales and customer process configuration\n- Custom addon and reporting guidance\n- Team training and ongoing implementation support\n\n## Result\n\nMaxpolanka received a tailored Core Odoo ERP setup that supports motor parts operations with stronger stock visibility, workflow control, and reporting readiness. Preparing for a tailored Odoo rollout? Review our [Odoo Implementation Checklist](blog-detail.html?slug=odoo-implementation-checklist) or [contact our Colombo team](contact.html).",
     "source": "markdown"
   }
 ];

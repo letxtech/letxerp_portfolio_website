@@ -23,11 +23,27 @@
     return "blog-detail.html?slug=" + encodeURIComponent(blog.slug);
   }
 
+  function buildCoverAlt(blog) {
+    return (blog.title || "LetX ERP Guide") + " - " + (blog.category || "ERP") + " guide by LetX ERP";
+  }
+
+  function localWebpPath(src) {
+    var m = String(src || "").match(/^(images\/letx\/(?:blog-cover|portfolio-cover|erp-implementation-team|erp-two-paths|hero-erp-dashboard|hero-mobile-erp|hero-mobile-odoo|hero-laptop-erp-modules|hero-laptop-erp-workflow))\.png$/i);
+    return m ? m[1] + ".webp" : "";
+  }
+
+  function renderResponsiveImg(src, alt, w, h, lazy) {
+    var webp = localWebpPath(src);
+    var attrs = 'src="' + escapeHtml(src) + '" alt="' + escapeHtml(alt) + '" width="' + w + '" height="' + h + '" decoding="async"' + (lazy ? ' loading="lazy"' : "");
+    var imgTag = "<img " + attrs + " />";
+    return webp ? '<picture><source srcset="' + escapeHtml(webp) + '" type="image/webp">' + imgTag + "</picture>" : imgTag;
+  }
+
   function renderHomeCard(blog) {
     return [
       '<div class="news-block col-md-4 col-sm-6 col-xs-12">',
       '<div class="inner-box">',
-      '<div class="image"><a href="' + detailUrl(blog) + '"><img src="' + escapeHtml(blog.cover) + '" alt="' + escapeHtml(blog.title) + '" /></a></div>',
+      '<div class="image"><a href="' + detailUrl(blog) + '">' + renderResponsiveImg(blog.cover, buildCoverAlt(blog), 1672, 941, true) + '</a></div>',
       '<div class="lower-content">',
       '<h3><a href="' + detailUrl(blog) + '">' + escapeHtml(blog.title) + "</a></h3>",
       '<div class="author">By <span>' + escapeHtml(blog.author) + "</span></div>",
@@ -40,7 +56,7 @@
     return [
       '<div class="news-block-two col-md-6 col-sm-6 col-xs-12">',
       '<div class="inner-box">',
-      '<div class="image"><a href="' + detailUrl(blog) + '"><img src="' + escapeHtml(blog.cover) + '" alt="' + escapeHtml(blog.title) + '" /></a></div>',
+      '<div class="image"><a href="' + detailUrl(blog) + '">' + renderResponsiveImg(blog.cover, buildCoverAlt(blog), 1672, 941, true) + '</a></div>',
       '<div class="lower-content">',
       '<div class="upper-box">',
       '<div class="posted-date">' + escapeHtml(formatDate(blog.date)) + "</div>",
@@ -61,7 +77,12 @@
     return escapeHtml(value)
       .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
       .replace(/\*(.*?)\*/g, "<em>$1</em>")
-      .replace(/\[([^\]]+)\]\(([^\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+      .replace(/\[([^\]]+)\]\(([^\)]+)\)/g, function (_m, text, url) {
+        var isExternal = /^https?:\/\//i.test(url);
+        return isExternal
+          ? '<a href="' + url + '" target="_blank" rel="noopener">' + text + "</a>"
+          : '<a href="' + url + '">' + text + "</a>";
+      });
   }
 
   function markdownToHtml(markdown) {
@@ -129,6 +150,17 @@
     tag.setAttribute("content", content);
   }
 
+  function setPropertyMeta(property, content) {
+    if (!content) return;
+    var tag = document.querySelector('meta[property="' + property + '"]');
+    if (!tag) {
+      tag = document.createElement("meta");
+      tag.setAttribute("property", property);
+      document.head.appendChild(tag);
+    }
+    tag.setAttribute("content", content);
+  }
+
   function setCanonical(url) {
     var link = document.querySelector('link[rel="canonical"]');
     if (!link) {
@@ -140,20 +172,41 @@
   }
 
   function setJsonLd(blog, url) {
-    var script = document.createElement("script");
+    var existing = document.getElementById("letx-blog-jsonld");
+    var script = existing || document.createElement("script");
+    script.id = "letx-blog-jsonld";
     script.type = "application/ld+json";
     script.text = JSON.stringify({
       "@context": "https://schema.org",
       "@type": "BlogPosting",
       headline: blog.title,
+      url: url,
       description: blog.description,
-      image: new URL(blog.cover, window.location.href).href,
+      image: new URL(blog.cover, "https://letxerp.com/").href,
       datePublished: blog.date,
-      author: { "@type": "Organization", name: blog.author },
-      publisher: { "@type": "Organization", name: "LetX Technologies" },
-      mainEntityOfPage: url
+      dateModified: blog.date,
+      author: {
+        "@type": "Organization",
+        name: blog.author,
+        url: "https://letxerp.com/"
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "LetX Technologies",
+        url: "https://letxerp.com/",
+        logo: {
+          "@type": "ImageObject",
+          url: "https://letxerp.com/images/letx/letx-logo-full-white.png"
+        }
+      },
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": url
+      }
     });
-    document.head.appendChild(script);
+    if (!existing) {
+      document.head.appendChild(script);
+    }
   }
 
   function renderRecentSidebar() {
@@ -167,11 +220,25 @@
   }
 
   function renderLists() {
+    var params = new URLSearchParams(window.location.search);
+    var query = (params.get("q") || "").trim().toLowerCase();
+
     document.querySelectorAll("[data-blog-list]").forEach(function (container) {
       var type = container.getAttribute("data-blog-list");
       var limit = Number(container.getAttribute("data-blog-limit") || blogs.length);
-      var selectedBlogs = blogs.slice(0, limit);
+      var pool = blogs;
+      if (type !== "latest" && query) {
+        pool = blogs.filter(function (blog) {
+          var haystack = [blog.title, blog.description, blog.category, (blog.keywords || []).join(" ")].join(" ").toLowerCase();
+          return haystack.indexOf(query) !== -1;
+        });
+      }
+      var selectedBlogs = pool.slice(0, limit);
       var renderer = type === "latest" ? renderHomeCard : renderListCard;
+      if (!selectedBlogs.length && type !== "latest" && query) {
+        container.innerHTML = '<div class="col-md-12 text-center"><p>No guides matched "' + escapeHtml(params.get("q")) + '". <a href="blog-2.html">Show all ERP &amp; Odoo guides</a>.</p></div>';
+        return;
+      }
       container.innerHTML = selectedBlogs.map(renderer).join("");
     });
   }
@@ -182,29 +249,47 @@
 
     var params = new URLSearchParams(window.location.search);
     var slug = params.get("slug");
-    var blog = blogs.find(function (item) { return item.slug === slug; }) || blogs[0];
+    var matchedBlog = slug ? blogs.find(function (item) { return item.slug === slug; }) : blogs[0];
 
-    if (!blog) {
-      container.innerHTML = "<h3>No blog posts found</h3><p>Add markdown files inside the blogs folder and run the build script.</p>";
+    if (slug && !matchedBlog) {
+      setMeta("robots", "noindex, follow");
+      document.title = "Guide Not Found | LetX ERP Blog";
+      container.innerHTML = '<div class="inner-box"><div class="lower-content"><h2>Guide Not Found</h2><div class="text"><p>The requested ERP &amp; Odoo guide could not be found. Browse all <a href="blog-2.html">ERP &amp; Odoo insights</a> or <a href="contact.html">contact our team</a>.</p></div></div></div>';
       return;
     }
 
-    var currentUrl = window.location.origin + window.location.pathname + "?slug=" + encodeURIComponent(blog.slug);
-    document.title = blog.title + " | LetX ERP Blog";
+    var blog = matchedBlog;
+    if (!blog) {
+      container.innerHTML = "<h3>No blog posts found</h3><p>Add markdown files inside the blogs folder or publish articles in Contentful.</p>";
+      return;
+    }
+
+    setMeta("robots", "index, follow");
+    var currentUrl = "https://letxerp.com/blog-detail.html?slug=" + encodeURIComponent(blog.slug);
+    var absoluteCover = new URL(blog.cover, "https://letxerp.com/").href;
+    var seoTitle = blog.title + " | LetX ERP Blog";
+    document.title = seoTitle;
     setMeta("description", blog.description);
     setMeta("keywords", (blog.keywords || []).join(", "));
+    setPropertyMeta("og:title", seoTitle);
+    setPropertyMeta("og:description", blog.description);
+    setPropertyMeta("og:url", currentUrl);
+    setPropertyMeta("og:image", absoluteCover);
+    setMeta("twitter:title", seoTitle);
+    setMeta("twitter:description", blog.description);
+    setMeta("twitter:image", absoluteCover);
     setCanonical(currentUrl);
     setJsonLd(blog, currentUrl);
 
     container.innerHTML = [
       '<div class="inner-box">',
-      '<div class="image"><img src="' + escapeHtml(blog.cover) + '" alt="' + escapeHtml(blog.title) + '" /></div>',
+      '<div class="image">' + renderResponsiveImg(blog.cover, buildCoverAlt(blog), 1672, 941, false) + '</div>',
       '<div class="lower-content">',
       '<div class="upper-box">',
       '<div class="posted-date">' + escapeHtml(formatDate(blog.date)) + "</div>",
       '<ul class="post-meta"><li>By : ' + escapeHtml(blog.author) + "</li><li>" + escapeHtml(blog.category) + "</li></ul>",
       "</div>",
-      "<h3>" + escapeHtml(blog.title) + "</h3>",
+      "<h2>" + escapeHtml(blog.title) + "</h2>",
       '<div class="text blog-detail-content">' + markdownToHtml(blog.content) + "</div>",
       "</div></div>"
     ].join("");

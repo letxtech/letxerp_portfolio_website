@@ -27,7 +27,12 @@
     return escapeHtml(value)
       .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
       .replace(/\*(.*?)\*/g, "<em>$1</em>")
-      .replace(/\[([^\]]+)\]\(([^\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+      .replace(/\[([^\]]+)\]\(([^\)]+)\)/g, function (_m, text, url) {
+        var isExternal = /^https?:\/\//i.test(url);
+        return isExternal
+          ? '<a href="' + url + '" target="_blank" rel="noopener">' + text + "</a>"
+          : '<a href="' + url + '">' + text + "</a>";
+      });
   }
 
   function markdownToHtml(markdown) {
@@ -89,6 +94,17 @@
     tag.setAttribute("content", content);
   }
 
+  function setPropertyMeta(property, content) {
+    if (!content) return;
+    var tag = document.querySelector('meta[property="' + property + '"]');
+    if (!tag) {
+      tag = document.createElement("meta");
+      tag.setAttribute("property", property);
+      document.head.appendChild(tag);
+    }
+    tag.setAttribute("content", content);
+  }
+
   function setCanonical(url) {
     var link = document.querySelector('link[rel="canonical"]');
     if (!link) {
@@ -99,29 +115,65 @@
     link.setAttribute("href", url);
   }
 
+  function localWebpPath(src) {
+    var m = String(src || "").match(/^(images\/letx\/(?:blog-cover|portfolio-cover|erp-implementation-team|erp-two-paths|hero-erp-dashboard|hero-mobile-erp|hero-mobile-odoo|hero-laptop-erp-modules|hero-laptop-erp-workflow))\.png$/i);
+    return m ? m[1] + ".webp" : "";
+  }
+
+  function renderResponsiveImg(src, alt, w, h, lazy) {
+    var webp = localWebpPath(src);
+    var attrs = 'src="' + escapeHtml(src) + '" alt="' + escapeHtml(alt) + '" width="' + w + '" height="' + h + '" decoding="async"' + (lazy ? ' loading="lazy"' : "");
+    var imgTag = "<img " + attrs + " />";
+    return webp ? '<picture><source srcset="' + escapeHtml(webp) + '" type="image/webp">' + imgTag + "</picture>" : imgTag;
+  }
+
   function setJsonLd(project, url) {
-    var script = document.createElement("script");
+    var existing = document.getElementById("letx-portfolio-jsonld");
+    var script = existing || document.createElement("script");
+    script.id = "letx-portfolio-jsonld";
     script.type = "application/ld+json";
     script.text = JSON.stringify({
       "@context": "https://schema.org",
       "@type": "CreativeWork",
       name: project.title,
+      url: url,
       description: project.description,
-      image: new URL(project.cover, window.location.href).href,
+      image: new URL(project.cover, "https://letxerp.com/").href,
       datePublished: project.date,
       about: project.solution,
-      client: project.client,
-      mainEntityOfPage: url,
-      provider: { "@type": "Organization", name: "LetX Technologies" }
+      creator: {
+        "@type": "Organization",
+        name: "LetX Technologies",
+        url: "https://letxerp.com/"
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "LetX Technologies",
+        url: "https://letxerp.com/",
+        logo: {
+          "@type": "ImageObject",
+          url: "https://letxerp.com/images/letx/letx-logo-full-white.png"
+        }
+      },
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": url
+      }
     });
-    document.head.appendChild(script);
+    if (!existing) {
+      document.head.appendChild(script);
+    }
+  }
+
+  function buildCoverAlt(project) {
+    return (project.title || "LetX ERP Client") + " - " + (project.solution || "ERP Solution") + " (" + (project.package || "ERP") + ") by LetX ERP";
   }
 
   function renderPortfolioCard(project) {
     return [
       '<div class="gallery-item col-md-4 col-sm-6 col-xs-12">',
       '<div class="inner-box">',
-      '<figure class="image-box"><a href="' + detailUrl(project) + '"><img src="' + escapeHtml(project.cover) + '" alt="' + escapeHtml(project.title) + '"></a></figure>',
+      '<figure class="image-box"><a href="' + detailUrl(project) + '">' + renderResponsiveImg(project.cover, buildCoverAlt(project), 1672, 941, true) + '</a></figure>',
       '<h3><a href="' + detailUrl(project) + '">' + escapeHtml(project.title) + "</a></h3>",
       '<div class="designation">' + escapeHtml(project.package) + " | " + escapeHtml(project.industry) + "</div>",
       '<div class="portfolio-card-text">' + escapeHtml(project.description) + "</div>",
@@ -141,24 +193,42 @@
 
     var params = new URLSearchParams(window.location.search);
     var slug = params.get("slug");
-    var project = projects.find(function (item) { return item.slug === slug; }) || projects[0];
+    var matchedProject = slug ? projects.find(function (item) { return item.slug === slug; }) : projects[0];
 
-    if (!project) {
-      container.innerHTML = "<h3>No portfolio projects found</h3><p>Add markdown files inside the portfolio folder and run the content generator.</p>";
+    if (slug && !matchedProject) {
+      setMeta("robots", "noindex, follow");
+      document.title = "Case Study Not Found | LetX ERP Portfolio";
+      container.innerHTML = '<div class="inner-container"><div class="lower-content"><div class="upper-box"><div class="sec-title-two"><h2>Case Study Not Found</h2></div><p>The requested client implementation could not be found. Browse our <a href="portfolio-1.html">ERP &amp; Odoo portfolio</a> or <a href="contact.html">contact our team</a>.</p></div></div></div>';
       return;
     }
 
-    var currentUrl = window.location.origin + window.location.pathname + "?slug=" + encodeURIComponent(project.slug);
-    document.title = project.title + " | LetX ERP Portfolio";
+    var project = matchedProject;
+    if (!project) {
+      container.innerHTML = "<h3>No portfolio projects found</h3><p>Add markdown files inside the portfolio folder or configure Contentful entries to display client case studies.</p>";
+      return;
+    }
+
+    setMeta("robots", "index, follow");
+    var currentUrl = "https://letxerp.com/portfolio-detail.html?slug=" + encodeURIComponent(project.slug);
+    var absoluteCover = new URL(project.cover, "https://letxerp.com/").href;
+    var seoTitle = project.title + " — " + project.solution + " | LetX ERP Case Study";
+    document.title = seoTitle;
     setMeta("description", project.description);
     setMeta("keywords", (project.keywords || []).join(", "));
+    setPropertyMeta("og:title", seoTitle);
+    setPropertyMeta("og:description", project.description);
+    setPropertyMeta("og:url", currentUrl);
+    setPropertyMeta("og:image", absoluteCover);
+    setMeta("twitter:title", seoTitle);
+    setMeta("twitter:description", project.description);
+    setMeta("twitter:image", absoluteCover);
     setCanonical(currentUrl);
     setJsonLd(project, currentUrl);
 
     container.innerHTML = [
       '<div class="inner-container">',
       '<div class="upper-content">',
-      '<div class="image"><img src="' + escapeHtml(project.cover) + '" alt="' + escapeHtml(project.title) + '" /></div>',
+      '<div class="image">' + renderResponsiveImg(project.cover, buildCoverAlt(project), 1672, 941, false) + '</div>',
       '<div class="image-info"><div class="row clearfix">',
       '<div class="info-column col-md-6 col-sm-6 col-xs-12"><ul>',
       '<li><span>Client :</span>' + escapeHtml(project.client) + "</li>",

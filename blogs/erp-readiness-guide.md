@@ -27,8 +27,8 @@ LetX ERP helps businesses move those daily operations into one connected system.
 
 Start with the processes that create the most confusion. For many businesses this means sales orders, purchasing, inventory, invoicing, expenses, or customer follow-up. Document the current workflow, the people involved, and the reports you expect from the system.
 
-LetX Technologies can then guide you toward either Starter ERP for a light and focused rollout, or Odoo ERP for a broader implementation that supports more departments and long-term expansion.
+LetX Technologies can then guide you toward either [Desktop POS](price.html#desktop-detail) or [Essential Cloud ERP](price.html#essential-detail) for a light and focused rollout, or [Core and Advanced Odoo ERP](price.html#core-detail) for a broader customized implementation across multiple departments and long-term expansion.
 
 ## Final thought
 
-ERP readiness is less about company size and more about operational discipline. If your current tools are slowing down decisions, it is time to plan a cleaner system.
+ERP readiness is less about company size and more about operational discipline. Explore our [client ERP implementations](portfolio-1.html), prepare using our [Odoo Implementation Checklist](blog-detail.html?slug=odoo-implementation-checklist), or [contact our Colombo team](contact.html) on WhatsApp to plan a cleaner system.

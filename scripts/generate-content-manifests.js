@@ -245,7 +245,94 @@ function mergeCollections(markdownList, contentfulList) {
   });
 }
 
+function escapeXml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+
+function getFileDate(filePath) {
+  try {
+    return fs.statSync(filePath).mtime.toISOString().split("T")[0];
+  } catch (e) {
+    return "2026-11-12";
+  }
+}
+
+function generateSitemap(blogsList, portfolioList) {
+  const siteOrigin = "https://letxerp.com";
+  const staticPages = [
+    { path: "/", file: "index.html", changefreq: "weekly", priority: "1.0" },
+    { path: "/price.html", file: "price.html", changefreq: "weekly", priority: "0.9" },
+    { path: "/about.html", file: "about.html", changefreq: "monthly", priority: "0.8" },
+    { path: "/portfolio-1.html", file: "portfolio-1.html", changefreq: "weekly", priority: "0.8" },
+    { path: "/blog-2.html", file: "blog-2.html", changefreq: "weekly", priority: "0.8" },
+    { path: "/contact.html", file: "contact.html", changefreq: "monthly", priority: "0.8" },
+    { path: "/privacy-policy.html", file: "privacy-policy.html", changefreq: "yearly", priority: "0.3" },
+    { path: "/terms-and-conditions.html", file: "terms-and-conditions.html", changefreq: "yearly", priority: "0.3" }
+  ];
+
+  const entries = [];
+  staticPages.forEach((p) => {
+    entries.push({
+      loc: `${siteOrigin}${p.path}`,
+      lastmod: getFileDate(path.join(rootDir, p.file)),
+      changefreq: p.changefreq,
+      priority: p.priority
+    });
+  });
+
+  (portfolioList || []).forEach((item) => {
+    if (!item || !item.slug) return;
+    entries.push({
+      loc: `${siteOrigin}/portfolio-detail.html?slug=${encodeURIComponent(item.slug)}`,
+      lastmod: item.date || getFileDate(path.join(rootDir, "portfolio-detail.html")),
+      changefreq: "monthly",
+      priority: "0.7"
+    });
+  });
+
+  (blogsList || []).forEach((item) => {
+    if (!item || !item.slug) return;
+    entries.push({
+      loc: `${siteOrigin}/blog-detail.html?slug=${encodeURIComponent(item.slug)}`,
+      lastmod: item.date || getFileDate(path.join(rootDir, "blog-detail.html")),
+      changefreq: "monthly",
+      priority: "0.7"
+    });
+  });
+
+  const xml = [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    ...entries.map((u) => [
+      "  <url>",
+      `    <loc>${escapeXml(u.loc)}</loc>`,
+      `    <lastmod>${escapeXml(u.lastmod)}</lastmod>`,
+      `    <changefreq>${u.changefreq}</changefreq>`,
+      `    <priority>${u.priority}</priority>`,
+      "  </url>"
+    ].join("\n")),
+    "</urlset>\n"
+  ].join("\n");
+
+  fs.writeFileSync(path.join(rootDir, "sitemap.xml"), xml, "utf8");
+  console.log(`Generated sitemap.xml with ${entries.length} URL(s).`);
+}
+
 async function main() {
+  if (process.argv.includes("--sitemap-only")) {
+    const vm = require("vm");
+    const sandbox = { window: {} };
+    vm.runInNewContext(fs.readFileSync(path.join(rootDir, "js", "blog-manifest.js"), "utf8"), sandbox);
+    vm.runInNewContext(fs.readFileSync(path.join(rootDir, "js", "portfolio-manifest.js"), "utf8"), sandbox);
+    generateSitemap(sandbox.window.LETX_BLOGS || [], sandbox.window.LETX_PORTFOLIO || []);
+    return;
+  }
+
   // Read local Markdown
   const mdBlogs = readMarkdownCollection({
     dir: "blogs",
@@ -316,6 +403,8 @@ async function main() {
     `window.LETX_PORTFOLIO = ${JSON.stringify(finalPortfolio, null, 2)};\n`,
     "utf8"
   );
+
+  generateSitemap(finalBlogs, finalPortfolio);
 
   // Write public client config for optional browser-side live sync
   if (spaceId && accessToken) {
